@@ -1,0 +1,75 @@
+var createError = require('http-errors');
+var express = require('express');
+const mongoose = require('mongoose');
+var path = require('path');
+require('dotenv').config();
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+const expressSession= require("express-session");
+const passport = require('passport');
+const flash= require('connect-flash')
+var indexRouter = require('./routes/indexRouter');
+
+const adminRoutes = require('./routes/adminRoutes');
+const productRoutes = require('./routes/productRoutes');
+const usersRouter = require('./models/Admin');
+
+var app = express();
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+app.use(expressSession({
+  resave:false,
+  saveUninitialized:false,
+  secret:"geldixaakash"
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.serializeUser(usersRouter.serializeUser());
+passport.deserializeUser(usersRouter.deserializeUser());
+
+app.use(flash());
+
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost:27017/geldix');
+
+// Middleware for parsing request bodies
+app.use(express.urlencoded({ extended: true }));
+
+// Mount admin routes
+app.use('/api/admin/', adminRoutes);
+
+// Mount product routes
+app.use('/api/', productRoutes);
+
+// Mount index routes
+app.use('/', indexRouter);
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, '/')));
+
+app.use('/', indexRouter);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
+});
+
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
+
+module.exports = app;

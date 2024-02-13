@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geldix Pharmaceutical</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/public/stylesheets/style.css">
+</head>
+
+<body>
+
+  <nav>
+    <div id="nav-left">
+      <div id="logo">
+        <h1>Geldix</h1>
+        <p>Pharmaceutical</p>
+      </div>
+    </div>
+
+    <div id="nav-right">
+      <h4>HOME</h4>
+      <h4>PRODUCTS</h4>
+      <h4>ABOUT US</h4>
+      <h4>CONTACT US</h4>
+      <i class="ri-menu-5-line"></i>
+    </div>
+  </nav>
+
+  <div id="main">
+    <div id="home" data-scroll-section>
+      <div id="home-left" data-scroll>
+        <h1>Empowering Health, Enriching Lives</h1>
+        <p>we are dedicated to enhancing lives through the provision of high-quality pharmaceutical products and
+          healthcare solutions. With a steadfast commitment to innovation, excellence, and integrity, we strive to be a
+          trusted partner in healthcare delivery worldwide.</p>
+        <p>Driven by our mission to improve global health outcomes, Geldix Pharmaceuticals focuses on developing and
+          delivering innovative medications and therapeutic solutions that address unmet medical needs. Our diverse
+          portfolio encompasses a wide range of pharmaceutical products, including but not limited to prescription
+          medicines, over-the-counter medications, and specialty therapies.</p>
+
+      </div>
+      <div id="home-right" data-scroll>
+        <img src="/public/images/med.jpg" alt="">
+      </div>
+    </div>
+    <div id="products-heading" data-scroll-section>
+      <h1 data-scroll>OUR PRODUCTS</h1>
+    </div>
+    <div id="products" data-scroll-section>
+      <% products.forEach(product=> { %>
+        <a href="/products/<%= product._id %>" data-scroll>
+          <div class="product-card">
+            <img src="<%= product.image %>" alt="<%= product.productname %>">
+            <p id="product-name">
+              <%= product.productname %>
+            </p>
+            <p id="discounted-price">
+              <%= product.productdescription %>
+            </p>
+          </div>
+        </a>
+        <% }); %>
+    </div>
+    <div id="about-heading" data-scroll-section>
+      <h1>ABOUT US</h1>
+    </div>
+    <div class="about" data-scroll-section>
+      <div class="about-main about-left">
+        <p>At Geldix Pharmaceuticals, we are dedicated to enhancing lives through the provision of high-quality
+          pharmaceutical products and healthcare solutions. With a steadfast commitment to innovation, excellence, and
+          integrity, we strive to be a trusted partner in healthcare delivery worldwide.</p>
+        <br>
+        <p>Driven by our mission to improve global health outcomes, Geldix Pharmaceuticals focuses on developing and
+          delivering innovative medications and therapeutic solutions that address unmet medical needs. Our diverse
+          portfolio encompasses a wide range of pharmaceutical products, including but not limited to prescription
+          medicines, over-the-counter medications, and specialty therapies.</p>
+
+      </div>
+      <div class="about-main about-right">
+        <p>At the heart of our operations lies a team of passionate professionals who are dedicated to advancing
+          healthcare through research, development, manufacturing, and distribution. We adhere to stringent quality
+          standards and regulatory requirements to ensure that our products meet the highest levels of safety, efficacy,
+          and reliability.</p>
+        <br>
+        <p>Beyond our commitment to product excellence, Geldix Pharmaceuticals places a strong emphasis on customer
+          satisfaction and patient well-being. We continuously strive to foster strong relationships with healthcare
+          providers, pharmacies, and patients, ensuring accessibility and affordability of our medications.</p>
+
+      </div>
+      <div class="about-main about-left">
+        <p>As a socially responsible company, we are deeply invested in giving back to the communities we serve. Through
+          corporate social responsibility initiatives, philanthropic endeavors, and partnerships with healthcare
+          organizations, we aim to make a positive impact on society and contribute to the betterment of public health.
+        </p>
+        <br>
+        <p>Geldix Pharmaceuticals is poised to lead the way in shaping the future of healthcare, leveraging our
+          expertise, resources, and innovative spirit to make a meaningful difference in the lives of individuals and
+          communities worldwide. Join us on our journey as we continue to deliver excellence in pharmaceuticals and
+          healthcare solutions, empowering healthier futures for all.</p>
+      </div>
+    </div>
+
+    <div id="contact-heading" data-scroll-section>
+      <h1>CONTACT US</h1>
+    </div>
+    <div class="contact-us" data-scroll-section>
+      <div id="whatsapp">
+        <i class="ri-whatsapp-line"></i>
+        <a href="https://wa.me/919718164407?text=Hi+Geldix+Pharmaceutical" target="_blank">
+          <h2>Whatsapp</h2>
+        </a>
+      </div>
+
+      <div id="contact-form">
+        <form action="mailto:aakashpatel6250@gmail.com" enctype="text/plain" method="POST">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required><br><br>
+
+          <label for="email">Email:</label>
+          <input type="text" id="email" name="email" required><br><br>
+
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" rows="4" required></textarea><br><br>
+
+          <button>Submit</button>
+        </form>
+      </div>
+
+    </div>
+
+    <footer data-scroll-section>
+      <h4 id="copyright">©2024 Geldix Pharmaceutical. All Rights Reserved.</h4>
+      <h4 id="devloped">Developed by <a href="">Aakash Patel</a></h4>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+    integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+    integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="/public/javascripts/script.js"></script>
+</body>
+
+</html>
