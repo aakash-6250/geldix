@@ -1,8 +1,15 @@
 var createError = require('http-errors');
 var express = require('express');
+
+
+// Connect to MongoDB
 const mongoose = require('mongoose');
-var path = require('path');
 require('dotenv').config();
+
+console.log(process.env.MONGODB_URI)
+// Connect to MongoDB
+mongoose.connect(process.env.MONGODB_URI)
+var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const expressSession= require("express-session");
@@ -33,8 +40,6 @@ passport.deserializeUser(usersRouter.deserializeUser());
 
 app.use(flash());
 
-// Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/geldix');
 
 // Middleware for parsing request bodies
 app.use(express.urlencoded({ extended: true }));
