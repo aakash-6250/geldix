@@ -5,8 +5,6 @@ var express = require('express');
 // Connect to MongoDB
 const mongoose = require('mongoose');
 require('dotenv').config();
-
-console.log(process.env.MONGODB_URI)
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)
 var path = require('path');
