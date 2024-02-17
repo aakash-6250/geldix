@@ -32,6 +32,8 @@ router.get('/create',isLoggedIn, (req, res) => {
 // Render single product view
 router.get('/products/:productId', productController.getProductById);
 
+// Get all products
+router.get('/products', productController.getAllProducts);
 
 router.get('/admin', isLoggedIn, (req, res) => {
   return res.render('admin');

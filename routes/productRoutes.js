@@ -6,8 +6,6 @@ const upload = require('../controllers/multer');
 // Create a new product
 router.post('/products',isLoggedIn, upload.single('image'), productController.createProduct);
 
-// Get all products
-router.get('/products', productController.getAllProducts);
 
 // Get product by ID
 router.get('/products/:productId', productController.getProductById);
