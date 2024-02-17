@@ -33,6 +33,10 @@ router.get('/create',isLoggedIn, (req, res) => {
 router.get('/products/:productId', productController.getProductById);
 
 
+router.get('/admin', isLoggedIn, (req, res) => {
+  return res.render('admin');
+});
+
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
