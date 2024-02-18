@@ -11,15 +11,10 @@ res.render('index',{products: product})
 });
 
 
-router.get('/create',isLoggedIn, (req, res) => {
-  res.render('createProduct');
-});
 
 // Render single product view
 router.get('/products/:productId', productController.getProductById);
 
-// Get all products
-router.get('/products', productController.getAllProducts);
 
 router.get('/admin',requireLoggedOut ,(req, res) => {
   return res.render('admin');
