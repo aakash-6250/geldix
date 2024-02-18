@@ -16,7 +16,7 @@ function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.render('login');
+  res.redirect('/admin');
 };
 
 function requireLoggedOut(req, res, next) {

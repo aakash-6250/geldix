@@ -10,20 +10,6 @@ router.get('/', async function(req, res, next) {
 res.render('index',{products: product})
 });
 
-router.get('/register',requireLoggedOut, (req, res) => {
-  return res.render('register');
-});
-
-// Login admin
-router.get('/login',requireLoggedOut, (req, res) => {
-  return res.render('login');
-});
-
-// Logout admin
-router.get('/logout', isLoggedIn, (req, res) => {
-  return res.render('logout');
-});
-
 
 router.get('/create',isLoggedIn, (req, res) => {
   res.render('createProduct');
@@ -35,15 +21,19 @@ router.get('/products/:productId', productController.getProductById);
 // Get all products
 router.get('/products', productController.getAllProducts);
 
-router.get('/admin', isLoggedIn, (req, res) => {
+router.get('/admin',requireLoggedOut ,(req, res) => {
   return res.render('admin');
+});
+
+router.get('/dashboard',isLoggedIn ,(req, res) => {
+  return res.render('dashboard');
 });
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect('/login');
+  res.redirect('/admin');
 };
 
 function requireLoggedOut(req, res, next) {

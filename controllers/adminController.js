@@ -54,7 +54,7 @@ adminController.loginAdmin = async (req, res, next) => {
           console.error(err);
           return res.status(500).json({ error: 'Internal Server Error' });
         }
-        res.status(200).json({ message: 'Login successful', user });
+        res.redirect("/dashboard");
       });
     })(req, res, next);
   } catch (error) {

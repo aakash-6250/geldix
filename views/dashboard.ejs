@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>title</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/public/stylesheets/dashboard.css">
+</head>
+
+<body>
+
+
+    <div id="main">
+        <div id="logo">
+            <h1>Geldix</h1>
+        </div>
+        <div id="menu">
+            <ul>
+                <li onclick="allproducts()">All Products</li>
+                <li onclick="showCreateForm()">Add Products</li>
+                <li onclick="showUpdateForm()">Update Products</li>
+                <li>Delete Products</li>
+                <li>Unlist Products</li>
+            </ul>
+        </div>
+        <div id="content">
+
+            <div id="allproducts">
+                <h2>Product List</h2>
+                <ul id="productUl"></ul>
+            </div>
+
+            <div id="createProductForm" class="form-container">
+                <h2>Create Product</h2>
+                <form id="createForm">
+                    <!-- Add fields for creating a product -->
+                    <label for="productName">Product Name:</label>
+                    <input type="text" id="productName" name="productName" required><br><br>
+                    <label for="productdescription">Product desctiption:</label>
+                    <input type="text" id="productdescription" name="productdescription" required><br><br>
+                    <label for="image">Image</label>
+                    <input type="file" id="image" name="image" required><br>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+
+            <div id="updateProductForm" class="form-container">
+                <h2>Update Product</h2>
+                <form id="updateForm">
+                    <!-- Add fields for updating a product -->
+                    <label for="productName">Product Name:</label>
+                    <input type="text" id="productName" name="productName" required><br><br>
+                    <label for="productdescription">Product desctiption:</label>
+                    <input type="text" id="productdescription" name="productdescription" required><br><br>
+                    <label for="image">Image</label>
+                    <input type="file" id="image" name="image" required><br><br>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="/public/javascripts/dashboard.js"></script>
+</body>
+
+</html>

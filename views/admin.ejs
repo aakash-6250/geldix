@@ -7,27 +7,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>title</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/public/stylesheets/admin.css">
 </head>
 
 <body>
 
 
-    <div id="box">
-        <a href="/register">Register</a>
-        <a href="/login">Login</a>
-        <a href="/logout">Logout</a>
-        <a href="/create">Create Product</a>
-        <a href="/products">Products</a>
-    </div>
 
+    <div class="container">
+        <div class="card">
+            <h2>Admin Login</h2>
+            <form action="/api/admin/login" method="post">
+                <input type="text" id="username" name="username" placeholder="Username" required>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
         integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script src="script.js"></script>
+    <script src="/public/javascripts/script.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+/* @font-face {
+    font-family: Noto;
+    src: url(/public/fonts/noto.woff2);
+} */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+body,html {
+    width: 100%;
+    height: 100vh;
+    font-family: Noto, "Noto Sans JP";
+}
+
+#main{
+    width: 100%;
+}
+
+#logo{
+    width: 100%;
+    height: 10vh;
+    background-color: #b8bcbb78;
+    z-index: 10;
+    backdrop-filter: blur(30px);
+    color: #1f9993;
+    position: fixed;
+}
+
+#logo>h1{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    padding-left: 3vw;
+    font-size: 3vw;
+    font-weight: 600;
+}
+
+#menu{
+    width: 10vw;
+    height: 90vh;
+    background-color: #1f9993;
+    position: fixed;
+    top: 10vh;
+}
+
+#menu ul li{
+    border-bottom: 2px solid white;
+    padding: 4vh 0;
+    color: white;
+}
+
+#content{
+    width: 90vw;
+    position: relative;
+    left: 10vw;
+    top: 10vh;
+}
+
+
+#createProductForm{
+    display: none;
+}
+
+#updateProductForm{
+    display: none;
+}
+
+.form-container{
+    width: 100%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+.form-container>*{
+    margin: 2vw 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+
+input {
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: border-color 0.3s ease-in-out;
+    outline: none;
+    color: #333;
+}
+
+input:focus {
+    border-color: #1f9993;
+}
+
+button {
+    background-color: #1f9993df;
+    color: #fff;
+    padding: 1vh;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 2.5vh;
+    font-weight: 500;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #1f9993;
+    box-shadow: 2px 2px 2px 1px #1f99935a;
+}
+
+#allproducts{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#allproducts ul {
+    width: 100%;
+}
+
+#allproducts ul li{
+    border: 1px solid #1f9993;
+    border-left: none;
+    border-right: none;
+    list-style: none;
+    height: 25vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+
+
+
+#allproducts h2{
+    padding: 3vh 0;
+    width: max-content;
+}
+
+#allproducts > h2::after{
+    content: "";
+    display: block;
+    width: 100%;
+    height: 4px;
+    border-radius: 10px;
+    background-color:#1f9993;
+}
+
+#allproducts ul li:first-child{
+    border-top: 0px;
+}
+
+#allproducts ul li img{
+    height: 100%;
+}
+
+#allproducts ul li div a{
+    text-decoration: none;
+    color: white;
+    background-color: #1f9993;
+    display: flex;
+    margin: 10px 0;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
