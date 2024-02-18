@@ -10,11 +10,35 @@ function showUpdateForm() {
     document.getElementById("allproducts").style.display = "none";
 }
 
-document.getElementById("createForm").addEventListener("submit", function (event) {
-    event.preventDefault();
-    // Handle form submission for creating product
-    alert("Form submitted for creating product!");
+document.getElementById('createForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Get form data
+    const formData = new FormData(this);
+
+    // Make a POST request using fetch
+    fetch('/api/products', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Handle successful response
+        console.log('Success:', data);
+        // Optionally, display a success message or perform other actions
+    })
+    .catch(error => {
+        // Handle errors
+        console.error('Error:', error);
+        // Optionally, display an error message or perform other actions
+    });
 });
+
 
 document.getElementById("updateForm").addEventListener("submit", function (event) {
     event.preventDefault();
@@ -64,3 +88,4 @@ async function allproducts () {
 }
 
 window.onload = allproducts;
+
