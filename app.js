@@ -12,11 +12,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const expressSession= require("express-session");
 const passport = require('passport');
-const flash= require('connect-flash')
+const flash= require('connect-flash');
 var indexRouter = require('./routes/indexRouter');
-
-const adminRoutes = require('./routes/adminRoutes');
 const productRoutes = require('./routes/productRoutes');
+const apiRoutes = require('./routes/apiRoutes');
 const usersRouter = require('./models/Admin');
 
 var app = express();
@@ -43,10 +42,12 @@ app.use(flash());
 app.use(express.urlencoded({ extended: true }));
 
 // Mount admin routes
-app.use('/api/admin/', adminRoutes);
+// app.use('/api/admin/', adminRoutes);
+
+app.use('/api/', apiRoutes);
 
 // Mount product routes
-app.use('/api/', productRoutes);
+// app.use('/api/', productRoutes);
 
 // Mount index routes
 app.use('/', indexRouter);

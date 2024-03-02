@@ -21,9 +21,6 @@
             <ul>
                 <li onclick="allproducts()">All Products</li>
                 <li onclick="showCreateForm()">Add Products</li>
-                <li onclick="showUpdateForm()">Update Products</li>
-                <li>Delete Products</li>
-                <li>Unlist Products</li>
             </ul>
         </div>
         <div id="content">
@@ -33,12 +30,12 @@
                 <ul id="productUl"></ul>
             </div>
 
-            <div id="createProductForm" class="form-container">
+            <div id="createProductForm"  class="form-container">
                 <h2>Create Product</h2>
-                <form action="/api/products" method="post" id="createForm">
+                <form action="/api/add" enctype="multipart/form-data" method="post" id="createForm">
                     <!-- Add fields for creating a product -->
                     <label for="productName">Product Name:</label>
-                    <input type="text" id="productName" name="productName" required><br><br>
+                    <input type="text" id="productName" name="productname" required><br><br>
                     <label for="productdescription">Product desctiption:</label>
                     <input type="text" id="productdescription" name="productdescription" required><br><br>
                     <label for="image">Image</label>
@@ -49,10 +46,10 @@
 
             <div id="updateProductForm" class="form-container">
                 <h2>Update Product</h2>
-                <form id="updateForm">
+                <form action="/api/update" enctype="multipart/form-data" method="post" id="updateForm">
                     <!-- Add fields for updating a product -->
                     <label for="productName">Product Name:</label>
-                    <input type="text" id="productName" name="productName" required><br><br>
+                    <input type="text" id="productName" name="productname" required><br><br>
                     <label for="productdescription">Product desctiption:</label>
                     <input type="text" id="productdescription" name="productdescription" required><br><br>
                     <label for="image">Image</label>

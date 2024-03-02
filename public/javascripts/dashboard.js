@@ -4,59 +4,61 @@ function showCreateForm() {
     document.getElementById("allproducts").style.display = "none";
 }
 
-function showUpdateForm() {
+function showUpdateForm(x) {
     document.getElementById("updateProductForm").style.display = "block";
     document.getElementById("createProductForm").style.display = "none";
     document.getElementById("allproducts").style.display = "none";
+    var productid = x;
+    var form =document.getElementById("updateForm");
+    form.action = `/api/update/${productid}`;
 }
 
-document.getElementById('createForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent default form submission
-
-    // Get form data
-    const formData = new FormData(this);
+// document.getElementById('createForm').addEventListener('submit', function(event) {
+//     event.preventDefault(); // Prevent default form submission
+//     // Get form data
+//     const formData = new FormData(this);
 
     // Make a POST request using fetch
-    fetch('/api/products', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        // Handle successful response
-        console.log('Success:', data);
-        // Optionally, display a success message or perform other actions
-    })
-    .catch(error => {
-        // Handle errors
-        console.error('Error:', error);
-        // Optionally, display an error message or perform other actions
-    });
-});
+//     fetch('/api/products', {
+//         method: 'POST',
+//         body: formData
+//     })
+//     .then(response => {
+//         if (!response.ok) {
+//             throw new Error('Network response was not ok');
+//         }
+//         return response.json();
+//     })
+//     .then(data => {
+//         // Handle successful response
+//         console.log('Success:', data);
+//         // Optionally, display a success message or perform other actions
+//     })
+//     .catch(error => {
+//         // Handle errors
+//         console.error('Error:', error);
+//         // Optionally, display an error message or perform other actions
+//     });
+// });
 
 
-document.getElementById("updateForm").addEventListener("submit", function (event) {
-    event.preventDefault();
-    // Handle form submission for updating product
-    alert("Form submitted for updating product!");
-});
+// document.getElementById("updateForm").addEventListener("submit", function (event) {
+//     event.preventDefault();
+//     // Handle form submission for updating product
+//     alert("Form submitted for updating product!");
+// });
 
-document.getElementById("createForm").addEventListener("submit", function (event) {
-    event.preventDefault();
-    // Handle form submission for creating product
-    alert("Form submitted for creating product!");
-});
+// document.getElementById("createForm").addEventListener("submit", function (event) {
+//     event.preventDefault();
+//     // Handle form submission for creating product
+//     alert("Form submitted for creating product!");
+// });
 
-document.getElementById("updateForm").addEventListener("submit", function (event) {
-    event.preventDefault();
-    // Handle form submission for updating product
-    alert("Form submitted for updating product!");
-});
+// document.getElementById("updateForm").addEventListener("submit", function (event) {
+//     event.preventDefault();
+//     // Handle form submission for updating product
+//     alert("Form submitted for updating product!");
+// });
 
 
 async function allproducts () {
@@ -72,9 +74,8 @@ async function allproducts () {
     <h1>${product.productname}</h1>
     <p>${product.productdescription}</p>
     <div>
-        <a href="/updatebtn">Update</a>
-        <a href="/deletebtn">Delete</a>
-        <a href="/unlistbtn">Unlist</a>
+        <a onclick=showUpdateForm('${product._id}')>Update</a>
+        <a onclick=showUpdateForm('${product._id}'>Delete</a>
     </div>
 `;
                 productList.appendChild(listItem);
