@@ -11,7 +11,7 @@ router.post('/register',isLoggedOut, apicontroller.register);
 
 router.post('/logout', isLoggedIn,apicontroller.logout);
 
-router.post('/add',isLoggedIn,updload.single('image'),apicontroller.addproduct);
+router.post('/add',isLoggedIn,upload.single('image'),apicontroller.addproduct);
 
 router.post('/delete', isLoggedIn,apicontroller.deleteproduct);
 
