@@ -13,6 +13,21 @@ function showUpdateForm(x) {
     form.action = `/api/update/${productid}`;
 }
 
+function deleteProduct(x) {
+    var productid = x;
+    fetch(`/api/delete/${productid}`, {
+        method: 'POST'
+    })
+    .then(response => response.json())
+    .then(() => {
+        allproducts();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+
+}
+
 // document.getElementById('createForm').addEventListener('submit', function(event) {
 //     event.preventDefault(); // Prevent default form submission
 //     // Get form data
@@ -70,12 +85,12 @@ async function allproducts () {
             data.forEach(product => {
                 const listItem = document.createElement('li');
                 listItem.innerHTML += `
-    <img src="https://cdn01.pharmeasy.in/dam/products_otc/S31892/pharmeasy-fish-oil-1000mg-soft-gelatin-60-capsules-2-1707378524.jpg">
+    <img src='${product.image}'>
     <h1>${product.productname}</h1>
     <p>${product.productdescription}</p>
     <div>
         <a onclick=showUpdateForm('${product._id}')>Update</a>
-        <a onclick=showUpdateForm('${product._id}'>Delete</a>
+        <a onclick=deleteProduct('${product._id}')>Delete</a>
     </div>
 `;
                 productList.appendChild(listItem);

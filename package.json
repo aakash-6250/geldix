@@ -22,6 +22,9 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^8.0.0",
     "pm2": "^5.3.1",
+    "set-value": "^3.0.1",
+    "sharp": "^0.33.2",
+    "update": "^0.4.2",
     "uuid": "^9.0.1"
   }
 }

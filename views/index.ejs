@@ -52,7 +52,7 @@
     </div>
     <div id="products" data-scroll-section>
       <% products.forEach(product=> { %>
-        <a href="/products/<%= product._id %>" data-scroll>
+        <a href="/product/<%= product._id %>" data-scroll>
           <div class="product-card">
             <img src="<%= product.image %>" alt="<%= product.productname %>">
             <p id="product-name">

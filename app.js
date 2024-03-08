@@ -1,12 +1,8 @@
 var createError = require('http-errors');
 var express = require('express');
-
-
-// Connect to MongoDB
 const mongoose = require('mongoose');
 require('dotenv').config();
-// Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI);
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -14,13 +10,11 @@ const expressSession= require("express-session");
 const passport = require('passport');
 const flash= require('connect-flash');
 var indexRouter = require('./routes/indexRouter');
-const productRoutes = require('./routes/productRoutes');
 const apiRoutes = require('./routes/apiRoutes');
 const usersRouter = require('./models/Admin');
 
 var app = express();
 
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 

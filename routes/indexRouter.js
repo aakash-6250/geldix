@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const productController=require('../controllers/productController')
 const Product=require('../models/Product')
 
 // home page
@@ -26,24 +25,12 @@ router.get('/dashboard' ,isLoggedIn,(req, res) => {
 
 
 
-// Render single product view
-router.get('/products/:productId', productController.getProductById);
-
-// Get all products
-router.get('/products', productController.getAllProducts);
-
 function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect('/admin');
-};
+  req.isAuthenticated() ? next() : res.redirect('/admin');
+}
 
 function isLoggedOut(req, res, next) {
-  if (req.isAuthenticated()) {
-      return res.redirect('/logout');
-  }
-  next();
+  req.isAuthenticated() ? res.redirect('/dashboard') : next();
 }
 
 module.exports = router;
