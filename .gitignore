@@ -1,4 +1,5 @@
 node_modules/
+public/images/products/
 npm-debug.log
 yarn-debug.log
 yarn-error.log
