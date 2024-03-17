@@ -6,7 +6,7 @@ const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg'];
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './public/images/products');
+        cb(null, './public/images/temp');
     },
     filename: function (req, file, cb) {
         const uniquename = uuidv4();

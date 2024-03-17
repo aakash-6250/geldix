@@ -4,8 +4,18 @@ const Product=require('../models/Product')
 
 // home page
 router.get('/', async function(req, res, next) {
-  const product=await Product.find();
-res.render('index',{products: product})
+res.render('index')
+});
+
+
+// product page
+router.get('/products', async function(req, res, next) {
+  const products=await Product.find();
+res.render('products',{products: products})
+});
+
+router.get('/contact', async function(req, res, next) {
+res.render('contactus')
 });
 
 //Register page

@@ -79,11 +79,10 @@ apicontroller.logout = (req, res) => {
 // Add Product API
 apicontroller.addproduct = async (req, res) => {
     try {
-        const reqfile = req.file.path;
 
-        if (!reqfile) return res.status(400).json({ status: false, message: 'Product image is required' });
-        if (!req.body.productname) return res.status(400).json({ status: false, message: 'Product name is required' });
-        if (!req.body.productdescription) return res.status(400).json({ status: false, message: 'Product description is required' });
+        if (!req.file.path) return res.status(400).json({ status: false, message: 'Product image is required' });
+        if (!req.body.name) return res.status(400).json({ status: false, message: 'Product name is required' });
+        if (!req.body.description) return res.status(400).json({ status: false, message: 'Product description is required' });
 
         const admin = await Admin.findOne({ username: req.session.passport.user });
 
@@ -92,24 +91,23 @@ apicontroller.addproduct = async (req, res) => {
             return res.status(404).json({ status: false, message: 'Admin not found' });
         }
 
-        const imagepath = path.dirname(reqfile);
+        // const imagepath = path.dirname(req.file.path);
         const uniquename = uuidv4();
-        const finalimage = path.join(imagepath, uniquename + ".webp");
+        const finalimage = path.join('public', 'images', 'products', uniquename + ".webp");
 
-        await sharp(reqfile)
+        await sharp(req.file.path)
             .rotate()
             .toFile(finalimage);
 
         const product = new Product({
-            productname: req.body.productname,
-            productdescription: req.body.productdescription,
+            name: req.body.name,
+            description: req.body.description,
             user: admin.fullname,
-            image: finalimage
+            image: req.file.path
         });
 
-        await fs.promises.unlink(reqfile);
-
         await product.save();
+        await fs.promises.unlink(req.file.path);
 
         res.redirect("/dashboard");
     } catch (err) {

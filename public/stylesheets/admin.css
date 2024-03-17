@@ -42,6 +42,15 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.card img{
+    width: 10vw;
+    margin: auto;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+
+}
+
 h2 {
     text-align: center;
     color: #333;

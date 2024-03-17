@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>title</title>
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/public/stylesheets/admin.css">
-</head>
-
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Geldix Pharmaceuticals</title>
+        <link rel="shortcut icon" href="/public/images/icon.png" type="image/x-icon">
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+        <link rel="stylesheet" href="/public/stylesheets/style.css">
+    </head>
 <body>
 
+    <main>
+        <%- include('header') %>
 
-
-    <div class="container">
-        <div class="card">
+        <div class="card" alt="">
             <h2>Admin Login</h2>
             <form action="/api/login" method="post">
                 <input type="text" id="username" name="username" placeholder="Username" required>
@@ -23,14 +22,7 @@
                 <button type="submit">Login</button>
             </form>
         </div>
-    </div>
+    </main>
 
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <script src="/public/javascripts/script.js"></script>
 </body>
-
 </html>
