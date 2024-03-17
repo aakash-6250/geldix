@@ -63,7 +63,7 @@ nav #logo{
     display: flex;
     align-items: center;
     justify-content: center;
-    background:url('../images/logo.webp');
+    background:url('../images/logo.png');
     background-size: contain;
     background-repeat: no-repeat;
 }
