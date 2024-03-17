@@ -63,7 +63,7 @@ nav #logo{
     display: flex;
     align-items: center;
     justify-content: center;
-    background:url('../images/logo.png');
+    background:url('../images/logo.webp');
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -86,7 +86,7 @@ nav a{
     width: 100%;
     margin-top: 10vh;
     height: 80vh;
-    background:url('../images/hero.jpg');
+    background:url('../images/hero.webp');
     background-size: cover;
     position: fixed;
     z-index: -1;
