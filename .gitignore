@@ -15,8 +15,5 @@ yarn.lock
 .idea/
 *.min.js
 *.min.css
-*.jpg
-*.jpeg
-*.png
 .pnp.*
 pnp.js
