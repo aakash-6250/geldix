@@ -15,7 +15,7 @@
 html,body{
     width: 100%;
     height: 100vh;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Noto', 'Open Sans', sans-serif;
 }
 
 
@@ -89,111 +89,110 @@ nav a{
     text-decoration: none;
 }
 
-
-#hero{
+section{
     width: 100%;
-    margin-top: 10vh;
-    height: 80vh;
-    background:url('../images/hero.webp');
-    background-size: cover;
-    position: fixed;
-    z-index: -1;
 }
 
+section .content{
+    width: 90%;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
+    justify-content: space-around;
+    padding: 2vh 0;
+}
+
+section .heading{
+    width: 100%;
+    height: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 1vh;
+    padding: 2vh 0;
+}
+
+section .heading h4{
+    background-color: #1f9993;
+    color: white;
+    padding: 2vh 2vw;
+    border-radius: 50px;
+}
+
+section .heading h1{
+    font-size: 1.5rem;
+}
+
+section .heading p{
+    font-size: 1rem;
+}
+
+section .heading span {
+    color: #1f9993;
+}
+
+#herosection{
+    height: 70vh;
+}
+
+#heroimage{
+    width: 100%;
+    height: 70vh;
+    background: url('../images/hero.webp');
+    background-size: cover;
+    background-position: start;
+    position: absolute;
+    z-index: 0;
+}
 
 #herocontent{
     width: 100%;
     height: 70vh;
-    background-color: #10847e3d;
-}
-
-#herocontent #content{
-    width: 60vw;
-    height: 30vh;
+    background-color: #10847e2f;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: start;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    gap: 4vh;
+    z-index: 1;
+    padding: 0 5vw;
+    gap: 3vh;
+    color: white;
 }
 
-#herocontent #content h1{
+#herocontent h1{
     font-size: 2.5rem;
     font-weight: 900;
 }
 
-#herocontent #content span{
-    color: #ffffff;
-}
 
-#herocontent #content p{
+#herocontent p{
    font-size: 1.2rem;
 }
 
 #herocontent #content button{
-   background-color: #10847E;
-   color: white;
-   font-size: 1.2rem;
-   width: max-content;
-   padding: 2vh 1vw;
-   border: none;
-   border-radius: 30px;
+    width: max-content;
 }
 
 #aboutsection{
-    background-color: #F4F5FC;
-    width: 100%;
-    height: 95vh;
+    min-height: 90vh;
 }
 
-#aboutsection #content{
-    width: 90vw;
-    height: 90vh;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
 
-#aboutsection #content #heading{
-    width: 100%;
-    height: 25vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1vh;
-    margin-bottom: 2vh;
-    margin-top: 2vh;
-}
 
-#aboutsection #content #heading h4{
-    background-color: #10847E;
-    color: white;
-    padding: 2vh 1vw;
-    border-radius: 30px;
-}
-
-#aboutsection #content #heading h1{
-    font-size: 2.5rem;
-}
-
-#aboutsection #content #heading span{
-    color: #10847E;
-    border-radius: 20px;
-}
-
-#aboutsection #content #about{
-    height: 70vh;
+#about{
+    height: 60%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 3vw;
 }
 
-#aboutsection #content #about #aboutimg{
+#about #aboutimg{
     width: 35vw;
     height: 50vh;
     border-radius: 30px;
@@ -201,13 +200,13 @@ nav a{
     position: relative;
 } 
 
-#aboutsection #content #about #aboutimg img{
+#aboutimg img{
     width: 100%;
     height: 100%;
     object-fit: cover;
-} 
+}
 
-#aboutsection #content #about #aboutcontent{
+#about #aboutcontent{
     width: 50vw;
     height: 40vh;
     display: flex;
@@ -229,55 +228,21 @@ nav a{
     background-color: #10847e3d;
 }
 
-#objective{
+#objectivesection{
+    min-height: 100vh;
+    background-color: #F4F5FC;
+}
+
+#objectivesection #objectivebox{
     width: 100%;
-    height: 95vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-#objective #heading{
-    width: 100%;
-    height: 30vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2vh;
-}
-
-#objective #heading h4{
-    background-color: #10847E;
-    color: white;
-    padding: 2vh 1vw;
-    border-radius: 30px;
-}
-
-#objective #heading h1{
-    font-size: 2.5rem;
-}
-
-#objective #heading span{
-    color: #10847E;
-}
-
-#objective #heading p{
-    width: 60vw;
-    text-align: center;
-    font-size: 1.2rem;
-}
-
-#objective #objectivebox{
-    width: 100%;
-    height: 65vh;
+    height: max-content;
     display: flex;
     justify-content: center;
     gap: 2vw;
     align-items: center;
 }
 
-#objective #objectivebox .obox{
+#objectivesection #objectivebox .obox{
     width: 22vw;
     height:55vh;
     border-radius: 10px;
@@ -292,70 +257,38 @@ nav a{
     box-shadow: 2px 2px 5px #b2dedb7e;
 }
 
-#objective #objectivebox .obox i{
+#objectivesection #objectivebox .obox i{
     font-size: 4rem;
-    background-color: #F4F5FC;
-    border-radius: 5px;padding: 2vh 1vw;
+    background-color: white;
+    border-radius: 5px;
+    padding: 2vh;
 
 }
 
-#objective #objectivebox .obox h1{
-    font-size: 2rem;
+#objectivesection #objectivebox .obox h1{
+    font-size: 1.5rem;
 }
 
-#objective #objectivebox .obox p{
-    font-size: 1.2rem;
+#objectivesection #objectivebox .obox p{
+    font-size: 1rem;
     text-align: center;
 }
 
-#contactus{
+#contactsection{
+    min-height: max-content;
+}
+
+#contactsection #details{
     width: 100%;
-    height: 130vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#contactus #heading{
-    width: 100%;
-    height: 30vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 3vh;
-}
-
-#contactus #heading h4{
-    background-color: #10847E;
-    padding: 2vh 2vw;
-    color: white;
-    border-radius: 30px;
-}
-
-#contactus #heading h1{
-    font-size: 2.5rem;
-}
-
-#contactus #heading span{
-    color: #10847E;
-}
-
-#contactus #heading p{
-    text-align: center;
-    font-size: 1.2rem;
-}
-
-#contactus #details{
-    width: 100%;
-    height: 40vh;
+    height: max-content;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 3vw;
+    padding: 4vh 0;
 }
 
-#contactus #details .detail-box{
+#contactsection #details .detail-box{
     border: 1px solid #b2dedb;
     width: 20vw;
     height: 20vh;
@@ -376,61 +309,52 @@ a{
 }
 
 
-#contactus #details .detail-box i{
+#contactsection #details .detail-box i{
     font-size: 3rem;
     color: #10847E;
 }
 
-#contactus #mapandform{
+#contactsection #mapandform{
     width: 100%;
-    height: 60vh;
+    height: max-content;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 3vw;
+    padding: 3vh 0;
 }
 
-#contactus #mapandform #map{
+#contactsection #mapandform #map{
     width: 40%;
-    height: 80%;
+    height: 50vh;
     border-radius: 10px;
     overflow: hidden;
 }
 
-#contactus #mapandform #contactform{
+#contactsection #mapandform #contactform{
     width: 40%;
-    height: 80%;
+    height: 100%;
 }
 
-#contactus #mapandform form{
+#contactsection #mapandform form{
     display: flex;
     flex-direction: column;
-    gap: 2vh;
+    gap: 1vh;
     padding: 0% 20%;
 }
 
-#contactus #mapandform form input{
+#contactsection #mapandform form input{
     border: 1px solid #b2dedb;
     padding: 1vh;
 }
 
-#contactus #mapandform form button{
-    width: max-content;
-    background-color: #10847E;
-    color: white;
-    border: 1px solid #10847E;
-    padding: 2vh 1vw;
-    font-size: 1rem;
-    border-radius: 30px;
-}
-
-#contactus #mapandform form textarea{
+#contactsection #mapandform form textarea{
     border: 1px solid #b2dedb;
     padding: 1vh;
     resize: none;
 }
 
-#contactus #mapandform #map iframe{
+#contactsection #mapandform #map iframe{
     width: 100%;
     height: 100%;
     border: none;
@@ -465,13 +389,15 @@ footer #madeby{
     align-items: center;
     padding-left: 3vw;
     border-top: 1px solid #b2dedb;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 footer #madeby i{
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     color: red;
 }
+
+
 
 #products-section{
     width: 100%;
@@ -480,37 +406,6 @@ footer #madeby i{
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-#products-section #heading{
-    width: 100%;
-    height: 40vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 3vh;
-}
-
-#products-section #heading h4{
-    background-color: #10847E;
-    padding: 2vh 2vw;
-    color: white;
-    border-radius: 30px;
-}
-
-#products-section #heading h1{
-    font-size: 2.5rem;
-}
-
-#products-section #heading span{
-    color: #10847E;
-}
-
-#products-section #heading p{
-    text-align: center;
-    width: 40Vw;
-    font-size: 1.2rem;
 }
 
 #products-section #products{
@@ -598,14 +493,6 @@ footer #madeby i{
     padding: 1vh 1vw;
 }
 
-#products-section #products #products-controles #filter button{
-    background-color: #10847E;
-    color: white;
-    padding: 1vh 1vw;
-    border: none;
-    border-radius: 30px;
-}
-
 
 
 
@@ -650,17 +537,16 @@ input:focus {
 }
 
 button {
-    background-color: #1f9993df;
+    background-color: #1f9993;
     color: #fff;
-    padding: 10px;
+    padding: 2vh 2vw;
     border: none;
-    border-radius: 4px;
+    border-radius: 50px;
     cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
+    font-size: 1.2rem;
 }
 
 button:hover {
-    background-color: #1f9993;
     box-shadow: 2px 2px 2px 1px #1f99935a;
 }
 
@@ -698,4 +584,88 @@ button:hover {
         display: block;
         font-size: 2rem;
     }
+
+    #herosection{
+        height: 50vh;
+    }
+
+    #heroimage{
+        height: 50vh;
+    }
+
+    #herocontent{
+        height: 50vh;
+    }
+
+    button{
+        font-size: 1rem;
+        padding: 2vh 4vw;
+    }
+
+    section .heading h4{
+        padding:2vh 4vw;
+    }
+
+    #about{
+        flex-direction: column;
+    }
+
+    #about #aboutimg{
+        width: 80%;
+        height: 40vh;
+    }
+
+    #about #aboutcontent{
+        width: 80%;
+        height: max-content;
+        text-align: center;
+        padding: 3vh 0;
+    }
+
+    #objectivesection #objectivebox{
+        flex-direction: column;
+        gap: 3vh;
+    }
+
+    #objectivesection #objectivebox .obox{
+        width: 80%;
+        height: max-content;
+    }
+
+    #contactsection #details{
+        flex-direction: column;
+        gap: 3vh;
+        padding: 3vh 0;
+    }
+
+    #contactsection #details .detail-box{
+        width: 80%;
+        height: max-content;
+        padding: 2vh;
+    }
+
+    #contactsection #mapandform{
+        flex-direction: column;
+        gap: 3vh;
+        padding: 3vh 0;
+    }
+    
+
+    #contactsection #mapandform #map{
+        width: 90%;
+        height: 50vh;
+    }
+
+    #contactsection #mapandform #contactform{
+        width: 90%;
+        background-color: #10847E2f;
+        padding: 10% 5%;
+        border-radius: 5%;
+    }
+
+    #contactsection #mapandform form{
+        padding: 0% 5%;
+    }
+
+    
 }
