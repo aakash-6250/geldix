@@ -539,7 +539,7 @@ input:focus {
 button {
     background-color: #1f9993;
     color: #fff;
-    padding: 2vh 2vw;
+    padding: 1vh 1vw;
     border: none;
     border-radius: 50px;
     cursor: pointer;
