@@ -2,7 +2,7 @@ const multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
 const path = require("path");
 
-const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+const allowedMimeTypes = ['image/jpeg','image/JPEG', 'image/PNG', 'image/JPG', 'image/WEBP', 'image/png', 'image/jpg', 'image/webp'];
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -22,6 +22,6 @@ const filter = function (req, file, cb) {
     }
 };
 
-const upload = multer({ storage: storage, fileFilter: filter });
+const upload = multer({ storage: storage, fileFilter: filter }).single('image');
 
 module.exports = upload;

@@ -17,3 +17,5 @@ yarn.lock
 *.min.css
 .pnp.*
 pnp.js
+public/images/temp/
+public/images/products/

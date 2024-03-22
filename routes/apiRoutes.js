@@ -1,25 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const apicontroller = require('../controllers/apiController');
+const apicontroller = require('../controllers/apicontroller'); // Fix: Changed import statement to '../controllers/apicontroller'
 const upload = require('../controllers/multer');
 
-
-
 router.post('/login',isLoggedOut, apicontroller.login);
-
 router.post('/register',isLoggedOut, apicontroller.register);
-
 router.post('/logout', isLoggedIn,apicontroller.logout);
+router.post('/add',isLoggedIn,apicontroller.addproduct);
 
-router.post('/add',isLoggedIn,upload.single('image'),apicontroller.addproduct);
-
-router.get('/add',(req,res,next)=>{
-    res.send("hello");
-});
+// router.get('/add',(req,res,next)=>{
+//     res.send("hello");
+// });
 
 router.post('/delete/:id', isLoggedIn,apicontroller.deleteproduct);
 
-router.post('/update/:id', isLoggedIn,upload.single('image'),apicontroller.updateproduct);
+// router.post('/update/:id', isLoggedIn,upload.single('image'),apicontroller.updateproduct);
 
 router.get('/products',apicontroller.allproducts);
 

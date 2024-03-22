@@ -80,34 +80,66 @@ apicontroller.logout = (req, res) => {
 apicontroller.addproduct = async (req, res) => {
     try {
 
-        if (!req.file.path) return res.status(400).json({ status: false, message: 'Product image is required' });
-        if (!req.body.name) return res.status(400).json({ status: false, message: 'Product name is required' });
-        if (!req.body.description) return res.status(400).json({ status: false, message: 'Product description is required' });
 
-        const admin = await Admin.findOne({ username: req.session.passport.user });
 
-        if (!admin) {
-            await fs.promises.unlink(reqfile);
-            return res.status(404).json({ status: false, message: 'Admin not found' });
-        }
+        // const admin = await Admin.findOne({ username: req.session.passport.user });
 
-        // const imagepath = path.dirname(req.file.path);
-        const uniquename = uuidv4();
-        const finalimage = path.join('public', 'images', 'products', uniquename + ".webp");
+        // if (!admin) {
+        //     await fs.promises.unlink(reqfile);
+        //     return res.status(404).json({ status: false, message: 'Admin not found' });
+        // }
 
-        await sharp(req.file.path)
-            .rotate()
-            .toFile(finalimage);
+        // // const imagepath = path.dirname(req.file.path);
+        // const uniquename = uuidv4();
+        // const finalimage = path.join('public', 'images', 'products', uniquename + ".webp");
 
-        const product = new Product({
-            name: req.body.name,
-            description: req.body.description,
-            user: admin.fullname,
-            image: req.file.path
+        // await sharp(req.file.path)
+        //     .rotate()
+        //     .toFile(finalimage);
+
+        // const product = new Product({
+        //     name: req.body.name,
+        //     description: req.body.description,
+        //     user: admin.fullname,
+        //     image: req.file.path
+        // });
+
+        // await product.save();
+        // await fs.promises.unlink(req.file.path);
+
+        // res.redirect("/dashboard");
+
+
+        upload(req, res, async function (err) {
+            if (err) console.log(err);
+    
+            sharp(req.file.path)
+                .rotate()
+                .webp({ quality: 10 })
+                .toFile(`${path.join(__dirname, "../", "public", "images", "products", req.file.filename.split('.')[0])}.webp`, (err, info) => {
+                    if (err) console.log(err);
+
+                    if (!req.file.path) res.status(400).json({ status: false, message: 'Product image is required' });
+                    if (!req.body.name) res.status(400).json({ status: false, message: 'Product name is required' });
+                    if (!req.body.description) res.status(400).json({ status: false, message: 'Product description is required' });
+
+                    const admin = Admin.findOne({ username: req.session.passport.user });
+
+                    const product = new Product({
+                        productname: req.body.productname,
+                        productdescription: req.body.productdescription,
+                        user: admin.fullname,
+                        image: `${path.join(__dirname, "../", "public", "images", "products", req.file.filename.split('.')[0])}.webp`
+                    });
+    
+                    fs.unlinkSync(req.file.path, (err) => {
+                        if (err) console.error('Error removing old image:', err);
+                    });
+
+
+                });
+    
         });
-
-        await product.save();
-        await fs.promises.unlink(req.file.path);
 
         res.redirect("/dashboard");
     } catch (err) {
