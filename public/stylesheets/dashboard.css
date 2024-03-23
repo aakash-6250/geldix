@@ -55,6 +55,7 @@ body,html {
     border-bottom: 2px solid white;
     padding: 4vh 0;
     color: white;
+    cursor: pointer;
 }
 
 #content{

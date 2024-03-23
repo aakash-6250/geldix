@@ -1,7 +1,11 @@
+const { reload } = require("pm2");
+
 function showCreateForm() {
+
     document.getElementById("createProductForm").style.display = "block";
     document.getElementById("updateProductForm").style.display = "none";
     document.getElementById("allproducts").style.display = "none";
+
 }
 
 function showUpdateForm(x) {
@@ -57,9 +61,16 @@ async function allproducts() {
     document.getElementById("allproducts").style.display = "block";
 }
 
-async function logout(){
-    await fetch('/api/logout')
-        .catch(error => console.error('Error fetching data:', error));
+async function logout() {
+    try {
+        const response = await fetch('/api/logout');
+        if (!response.ok) {
+            throw new Error('Logout request failed');
+        }
+        location.reload();
+    } catch (error) {
+        console.error('Error logging out:', error);
+    }
 }
 
 window.onload = showCreateForm;

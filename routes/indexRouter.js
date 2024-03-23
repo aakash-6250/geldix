@@ -7,15 +7,20 @@ router.get('/', async function(req, res, next) {
 res.render('index')
 });
 
+router.get('/contact', async function(req, res, next) {
+res.render('contactus')
+});
 
 // product page
 router.get('/products', async function(req, res, next) {
   const products=await Product.find();
-res.render('products',{products: products})
+  res.render('products',{products:products})
 });
 
-router.get('/contact', async function(req, res, next) {
-res.render('contactus')
+// product page
+router.get('/product/:id', async function(req, res, next) {
+  const product=await Product.findById(req.params.id);
+  res.render('product',{product:product})
 });
 
 //Register page

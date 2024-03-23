@@ -1,24 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const apicontroller = require('../controllers/apicontroller'); // Fix: Changed import statement to '../controllers/apicontroller'
+const apicontroller = require('../controllers/apiController'); // Fix: Changed import statement to '../controllers/apiController'
 const upload = require('../controllers/multer');
 
 router.post('/login',isLoggedOut, apicontroller.login);
 router.post('/register',isLoggedOut, apicontroller.register);
-router.post('/logout', isLoggedIn,apicontroller.logout);
+router.get('/logout', isLoggedIn,apicontroller.logout);
 router.post('/add',isLoggedIn,apicontroller.addproduct);
-
-// router.get('/add',(req,res,next)=>{
-//     res.send("hello");
-// });
-
 router.post('/delete/:id', isLoggedIn,apicontroller.deleteproduct);
-
-// router.post('/update/:id', isLoggedIn,upload.single('image'),apicontroller.updateproduct);
-
+// router.post('/update/:id', isLoggedIn,apicontroller.updateproduct);
 router.get('/products',apicontroller.allproducts);
-
 router.get('/product/:id', apicontroller.getProductById);
+
+
 
 function isLoggedIn(req, res, next) {
     req.isAuthenticated() ? next() : res.redirect('/admin');
