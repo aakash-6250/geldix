@@ -1,5 +1,3 @@
-const { reload } = require("pm2");
-
 function showCreateForm() {
 
     document.getElementById("createProductForm").style.display = "block";
@@ -44,8 +42,8 @@ async function allproducts() {
                 const listItem = document.createElement('li');
                 listItem.innerHTML += `
                     <img src='${product.image}'>
-                    <h1>${product.productname}</h1>
-                    <p>${product.productdescription}</p>
+                    <h1>${product.name}</h1>
+                    <p>${product.description}</p>
                     <div>
                         <a onclick=showUpdateForm('${product._id}')>Update</a>
                         <a onclick=deleteProduct('${product._id}')>Delete</a>
@@ -73,5 +71,5 @@ async function logout() {
     }
 }
 
-window.onload = showCreateForm;
+onload = allproducts;
 

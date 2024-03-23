@@ -112,7 +112,6 @@ apiController.addproduct = async (req, res, next) => {
 
             const imageStream = fs.createReadStream(req.file.path);
 
-            // Process the image with sharp using a stream
             const processedImageStream = imageStream.pipe(
                 sharp()
                     .rotate()
@@ -123,16 +122,14 @@ apiController.addproduct = async (req, res, next) => {
 
             processedImageStream.pipe(writeStream);
 
-            // When the processing is finished, close the write stream
             writeStream.on('close', async () => {
-                // Delete the temporary file after processing
                 fs.unlinkSync(req.file.path);
 
                 const product = new Product({
                     name: name,
                     description: description,
                     user: admin.fullname,
-                    image: `/public/images/products/${imageFilename}.webp`
+                    image: `/images/products/${imageFilename}.webp`
                 });
 
                 await product.save();
@@ -140,10 +137,9 @@ apiController.addproduct = async (req, res, next) => {
                 res.status(200).json({ status: true, message: 'Product added successfully' });
             });
 
-            // Handle errors
             writeStream.on('error', (writeErr) => {
                 console.error('Error writing processed image:', writeErr);
-                fs.unlinkSync(req.file.path); // Delete the temporary file
+                fs.unlinkSync(req.file.path);
                 res.status(500).json({ status: false, message: 'Error writing processed image' });
             });
         } catch (error) {
@@ -161,7 +157,7 @@ apiController.updateproduct = async (req, res, next) => {
 
         try {
             const { id } = req.params;
-            const { productname, productdescription } = req.body;
+            const { name, description } = req.body;
 
             const product = await Product.findById(id);
 
@@ -172,32 +168,47 @@ apiController.updateproduct = async (req, res, next) => {
                 return res.status(404).json({ status: false, message: 'Product not found' });
             }
 
-            if (!productname && !productdescription && !req.file) {
+            if (!name && !description && !req.file) {
                 return res.status(400).json({ status: false, message: 'No update data provided' });
             }
 
-            if (productname) product.name = productname;
-            if (productdescription) product.description = productdescription;
+            if (name) product.name = name;
+            if (description) product.description = description;
 
             if (req.file) {
-                const reqfile = req.file.path;
-                const imagepath = path.dirname(reqfile);
-                const uniquename = uuidv4();
-                const finalimage = path.join(imagepath, uniquename + ".webp");
 
-                await sharp(reqfile)
-                    .rotate()
-                    .toFile(finalimage);
+                const imageFilename = req.file.filename.split('.')[0];
+                const finalImagePath = path.join(__dirname, '../', 'public', 'images', 'products', `${imageFilename}.webp`);
 
-                fs.unlinkSync(product.image); // Remove the old image
-                product.image = finalimage;
+                const imageStream = fs.createReadStream(req.file.path);
 
-                fs.unlinkSync(reqfile); // Remove the temporary uploaded image
+                const processedImageStream = imageStream.pipe(
+                    sharp()
+                        .rotate()
+                        .webp({ quality: 10 })
+                );
+
+                const writeStream = fs.createWriteStream(finalImagePath);
+
+                processedImageStream.pipe(writeStream);
+
+                writeStream.on('close', async () => {
+                    fs.unlinkSync(req.file.path);
+
+                    product.image = `/images/products/${imageFilename}.webp`;
+
+                    await product.save();
+
+                    res.status(200).json({ status: true, message: 'Product updated successfully' });
+                });
+
+                writeStream.on('error', (writeErr) => {
+                    console.error('Error writing processed image:', writeErr);
+                    fs.unlinkSync(req.file.path);
+                    res.status(500).json({ status: false, message: 'Error writing processed image' });
+                });
             }
 
-            await product.save();
-
-            res.status(200).json({ status: true, message: 'Product updated successfully' });
         } catch (error) {
             console.error('Error updating product:', error);
             res.status(500).json({ status: false, message: 'Internal Server Error' });
