@@ -8,7 +8,7 @@ router.post('/register',isLoggedOut, apicontroller.register);
 router.get('/logout', isLoggedIn,apicontroller.logout);
 router.post('/add',isLoggedIn,apicontroller.addproduct);
 router.post('/delete/:id', isLoggedIn,apicontroller.deleteproduct);
-// router.post('/update/:id', isLoggedIn,apicontroller.updateproduct);
+router.post('/update/:id', isLoggedIn,apicontroller.updateproduct);
 router.get('/products',apicontroller.allproducts);
 router.get('/product/:id', apicontroller.getProductById);
 
