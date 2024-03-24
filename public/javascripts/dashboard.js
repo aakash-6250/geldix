@@ -6,9 +6,7 @@ function showCreateForm() {
 
 }
 
-function showUpdateForm(x) {
-
-    var productid = x;
+function showUpdateForm(productid) {
     document.getElementById("updateProductForm").style.display = "block";
     document.getElementById("createProductForm").style.display = "none";
     document.getElementById("allproducts").style.display = "none";
@@ -16,8 +14,7 @@ function showUpdateForm(x) {
     form.action = `/api/update/${productid}`;
 }
 
-function deleteProduct(x) {
-    var productid = x;
+function deleteProduct(productid) {
     fetch(`/api/delete/${productid}`, {
         method: 'POST'
     })
@@ -38,19 +35,24 @@ async function allproducts() {
         .then(data => {
             const productList = document.getElementById('productlist');
             productList.innerHTML = '';
-            data.forEach(product => {
-                const listItem = document.createElement('li');
-                listItem.innerHTML += `
-                    <img src='${product.image}'>
-                    <h1>${product.name}</h1>
-                    <p>${product.description}</p>
-                    <div>
-                        <a onclick=showUpdateForm('${product._id}')>Update</a>
-                        <a onclick=deleteProduct('${product._id}')>Delete</a>
-                    </div>
-                `;
-                productList.appendChild(listItem);
-            });
+
+            if (data.length > 0) {
+                data.forEach(product => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML += `
+                        <img src='${product.image}'>
+                        <h1>${product.name}</h1>
+                        <p>${product.description}</p>
+                        <div>
+                            <a onclick=showUpdateForm('${product._id}')>Update</a>
+                            <a onclick=deleteProduct('${product._id}')>Delete</a>
+                        </div>
+                    `;
+                    productList.appendChild(listItem);
+                });
+            } else {
+                productList.innerHTML = '<li>No products found</li>';
+            }
         })
         .catch(error => console.error('Error fetching data:', error));
 
@@ -58,6 +60,7 @@ async function allproducts() {
     document.getElementById("updateProductForm").style.display = "none";
     document.getElementById("allproducts").style.display = "block";
 }
+
 
 async function logout() {
     try {

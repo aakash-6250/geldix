@@ -162,9 +162,6 @@ apiController.updateproduct = async (req, res, next) => {
             const product = await Product.findById(id);
 
             if (!product) {
-                if (req.file) {
-                    fs.unlinkSync(req.file.path);
-                }
                 return res.status(404).json({ status: false, message: 'Product not found' });
             }
 
@@ -176,12 +173,10 @@ apiController.updateproduct = async (req, res, next) => {
             if (description) product.description = description;
 
             if (req.file) {
-
                 const imageFilename = req.file.filename.split('.')[0];
                 const finalImagePath = path.join(__dirname, '../', 'public', 'images', 'products', `${imageFilename}.webp`);
 
                 const imageStream = fs.createReadStream(req.file.path);
-
                 const processedImageStream = imageStream.pipe(
                     sharp()
                         .rotate()
@@ -207,8 +202,10 @@ apiController.updateproduct = async (req, res, next) => {
                     fs.unlinkSync(req.file.path);
                     res.status(500).json({ status: false, message: 'Error writing processed image' });
                 });
+            } else {
+                await product.save();
+                res.status(200).json({ status: true, message: 'Product updated successfully' });
             }
-
         } catch (error) {
             console.error('Error updating product:', error);
             res.status(500).json({ status: false, message: 'Internal Server Error' });
@@ -216,11 +213,12 @@ apiController.updateproduct = async (req, res, next) => {
     });
 };
 
+
 apiController.deleteproduct = async (req, res, next) => {
     try {
         const { id } = req.params;
         const prod = await Product.findByIdAndDelete(id);
-        fs.unlinkSync(path.join(__dirname, "../", prod.image));
+        fs.unlinkSync(path.join(__dirname,"../", "public", prod.image));
         res.json({ message: 'Product deleted successfully' });
     } catch (error) {
         console.error('Error deleting product:', error);
@@ -231,11 +229,7 @@ apiController.deleteproduct = async (req, res, next) => {
 apiController.allproducts = async (req, res, next) => {
     try {
         const products = await Product.find();
-        if (products.length > 0) {
-            res.status(200).json(products);
-        } else {
-            res.status(404).json({ message: 'No products found' });
-        }
+        if (products) res.status(200).json(products);
     } catch (error) {
         console.error('Error fetching products:', error);
         res.status(500).json({ error: 'Internal Server Error' });
