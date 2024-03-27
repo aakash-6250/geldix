@@ -18,27 +18,70 @@
 
 <body>
 
-    <section id="hero">
-    </section>
+    <div class="loader-wrapper">
+        <div class="loader"></div>
+    </div>
 
 
     <main>
         <%- include('header') %>
 
         <section id="herosection">
-            <div id="heroimage">
-            </div>
+            <img src="/images/hero.webp" alt="">
             <div id="herocontent">
                 <h1>Geldix Pharmaceuticals Private Limited</h1>
                 <p>We are team of extremely passionate people who strive to make a difference in Healthcare</p>
-                <button>About Us</button>
+                <a href="#aboutsection">About Us</a>
+            </div>
+        </section>
+
+        <section id="objectivesection">
+            <div class="content">
+                <div class="heading">
+                    <p id="btn-heading">Our Objective</p>
+                    <h1>Vision | <span>Mission</span> | Strategy</h1>
+                    <p>Our objective is to provide high quality, affordable and innovative healthcare products to people
+                        across the globe. We are committed to our customers and partners and have a passion for
+                        technology
+                        and innovation.</p>
+                </div>
+
+                <div id="objectivebox">
+                    <div id="first" class="obox">
+                        <i class="ri-eye-line"></i>
+                        <h1>Vision</h1>
+                        <p>Our vision is to be a leading pharmaceutical company in India and to become a significant
+                            global
+                            player by providing high quality, affordable and innovative solutions in medicine and
+                            treatment.
+                        </p>
+                    </div>
+                    <div id="second" class="obox">
+                        <i class="ri-compass-3-line"></i>
+                        <h1>Mission</h1>
+                        <p>Our mission is to provide high quality, affordable and innovative healthcare products to
+                            people
+                            across the globe. We are committed to our customers and partners and have a passion for
+                            technology
+                            and innovation.</p>
+                    </div>
+                    <div id="third" class="obox">
+                        <i class="ri-store-fill"></i>
+                        <h1>Strategy</h1>
+                        <p>Our strategy is to focus on the development of new products and to expand our product
+                            portfolio
+                            through strategic partnerships and collaborations. We are committed to our customers and
+                            partners
+                            and have a passion for technology and innovation.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section id="aboutsection">
             <div class="content">
                 <div class="heading">
-                    <p id="buttonhead">About Us</p>
+                    <p id="btn-heading">About Us</p>
                     <h1>Find Out More <span>About Us</span></h1>
                     <p>Geldix pharmaceuticals is a dream venture of extremely passionate people who strive to make a
                         difference.</p>
@@ -49,57 +92,24 @@
                         <div class="layer"></div>
                     </div>
                     <div id="aboutcontent">
-                        <h1>Our Mission</h1>
-                        <p>Our mission is to provide high quality, affordable and innovative healthcare products to
-                            people across the globe. We are committed to our customers and partners and have a passion
-                            for technology and innovation.</p>
-                        <h1>Our Vision</h1>
-                        <p>Our vision is to be a leading pharmaceutical company in India and to become a significant
-                            global player by providing high quality, affordable and innovative solutions in medicine and
-                            treatment.</p>
+                        <div class="aboutcontent-point">
+                            <h1>Our Mission</h1>
+                            <p>Our mission is to provide high quality, affordable and innovative healthcare products to
+                                people across the globe. We are committed to our customers and partners and have a
+                                passion
+                                for technology and innovation.</p>
+                        </div>
+                        <div class="aboutcontent-point">
+                            <h1>Our Vision</h1>
+                            <p>Our vision is to be a leading pharmaceutical company in India and to become a significant
+                                global player by providing high quality, affordable and innovative solutions in medicine
+                                and
+                                treatment.</p>
+                        </div>
                     </div>
 
                 </div>
         </section>
-
-        <section id="objectivesection">
-            <div class="content">
-                <div class="heading">
-                    <p id="buttonhead">Our Objective</p>
-                    <h1>Vision | <span>Mission</span> | Strategy</h1>
-                    <p>Our objective is to provide high quality, affordable and innovative healthcare products to people
-                        across the globe. We are committed to our customers and partners and have a passion for technology
-                        and innovation.</p>
-                </div>
-    
-                <div id="objectivebox">
-                    <div id="first" class="obox">
-                        <i class="ri-eye-line"></i>
-                        <h1>Vision</h1>
-                        <p>Our vision is to be a leading pharmaceutical company in India and to become a significant global
-                            player by providing high quality, affordable and innovative solutions in medicine and treatment.
-                        </p>
-                    </div>
-                    <div id="second" class="obox">
-                        <i class="ri-compass-3-line"></i>
-                        <h1>Mission</h1>
-                        <p>Our mission is to provide high quality, affordable and innovative healthcare products to people
-                            across the globe. We are committed to our customers and partners and have a passion for
-                            technology
-                            and innovation.</p>
-                    </div>
-                    <div id="third" class="obox">
-                        <i class="ri-store-fill"></i>
-                        <h1>Strategy</h1>
-                        <p>Our strategy is to focus on the development of new products and to expand our product portfolio
-                            through strategic partnerships and collaborations. We are committed to our customers and
-                            partners
-                            and have a passion for technology and innovation.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <%- include('contact') %>
         <%- include('footer') %>
     </main>

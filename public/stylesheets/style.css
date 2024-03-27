@@ -1,200 +1,184 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
-
-
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html,body{
+html,
+body {
     width: 100%;
     height: 100vh;
-    font-family: 'Noto Sans JP', 'Open Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
-
-section{
-    background-color: white;
+html{
+    scroll-behavior: smooth;
 }
 
-header{
-    position: sticky;
-    top: -5vh;
-    z-index: 999;
-}
-
-#contact{
-    background-color: #0D5E59;
-    padding: 0 10vw;
+.loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 5vh;
+    height: 100%;
+    background-color: #ffffff;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#email,#phone,#social{
-    display: flex;
-    justify-content: space-between;
-}
-
-#social{
-    width: 10%;
-}
-
-#contact  a{
-    color: white;
-}
-
-
-nav{
-    width: 100%;
-    height: 10vh;
-    padding: 0 10vw;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: white;
-}
-
-nav #logo{
-    width: 40vw;
-    height: 8vh;
-    display: flex;
-    align-items: center;
     justify-content: center;
-    background:url('/images/logo.webp');
-    background-size: contain;
-    background-repeat: no-repeat;
+    align-items: center;
+    z-index: 9999;
 }
 
-nav i{
-    display: none;
+.loader {
+    border: 8px solid #0d5e5929;
+    border-top: 8px solid #0D5E59;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
 }
 
-nav #menu{
-    width: 25vw;
-    display: flex;
-    justify-content: space-around;
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
-nav a{
+a {
     color: black;
     text-decoration: none;
 }
 
-section{
+
+main {
     width: 100%;
+    height: max-content;
+    display: none;
 }
 
-section .content{
-    width: 90%;
-    height: 100%;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 5vh;
-    justify-content: space-around;
-    padding: 2vh 0;
-}
-
-section .heading{
+header {
     width: 100%;
-    height: 25%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    gap: 1vh;
-    padding: 2vh 0;
+    height: 13vh;
 }
 
-section .heading #buttonhead{
+#contact {
+    width: 100%;
+    height: 4vh;
     background-color: #0D5E59;
-    color: white;
-    padding: 2vh 2vw;
-    border-radius: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
 }
 
-section .heading h1{
+#contact a {
+    color: white;
+}
+
+nav {
+    width: 100%;
+    height: 9vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+
+}
+
+nav img {
+    width: 160px;
+    height: 8vh;
+}
+
+#menu {
+    display: flex;
+    gap: 3vw;
+    font-size: 1.1rem;
+}
+
+#menuicon {
+    display: none;
     font-size: 1.5rem;
 }
 
-section .heading p{
-    font-size: 1rem;
-}
-
-section .heading span {
-    color: #0D5E59;
+section {
+    width: 100%;
+    height: max-content;
 }
 
 #herosection{
-    height: 70vh;
+    min-height: 90vh;
+    position: relative;
 }
 
-#heroimage{
+#herosection img {
     width: 100%;
-    height: 70vh;
-    background: url('/images/hero.webp');
-    background-size: cover;
-    background-position: start;
-    position: absolute;
-    z-index: 0;
+    height: 90vh;
+    object-fit: cover;
 }
 
 #herocontent{
     width: 100%;
-    height: 70vh;
-    background-color: #10847e2f;
+    height: 90vh;
+    position: absolute;
+    top: 0;
+    background-color: #0d5e5949;
+    color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: start;
-    position: absolute;
-    z-index: 1;
-    padding: 0 5vw;
-    gap: 3vh;
+    gap: 4vh;
+    padding: 0 10%;
+    font-size: 1.3rem;
+}
+
+
+#herocontent a {
+    color: white;
+    background-color: #0D5E59;
+    padding: 10px 20px;
+    width: max-content;
+    border-radius: 40px;
+}
+
+
+section .heading{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2vh 20vw;
+    text-align: center;
+    gap: 2vh;
+}
+
+section .heading h1 {
+    font-size: 1.5rem;
+}
+
+section .heading span{
+    color: #0D5E59;
+}
+
+section .heading> #btn-heading{
+    background-color: #0D5E59;
+    padding: 10px 20px;
+    width: max-content;
+    border-radius: 30px;
     color: white;
 }
 
-#herocontent h1{
-    font-size: 2.5rem;
-    font-weight: 900;
-}
-
-
-#herocontent p{
-   font-size: 1.2rem;
-}
-
-#herocontent #content button{
-    width: max-content;
-}
-
-#aboutsection{
-    min-height: 90vh;
-}
-
-
-
 #about{
-    height: 60%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    padding: 5vmax 10%;
     gap: 3vw;
 }
 
-#about #aboutimg{
-    width: 35vw;
-    height: 50vh;
+
+#aboutimg{
+    width: 30vw;
+    height: 60vh;
     border-radius: 30px;
     overflow: hidden;
-    position: relative;
-} 
+}
 
 #aboutimg img{
     width: 100%;
@@ -202,466 +186,280 @@ section .heading span {
     object-fit: cover;
 }
 
-#about #aboutcontent{
+#aboutcontent{
     width: 50vw;
-    height: 40vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 2vh;
-} 
+    gap: 15vh;
+}
 
-#aboutcontent h1{
+.aboutcontent-point h1{
     font-size: 2rem;
-    color: #0D5E59;
 }
 
-.layer{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    background-color: #10847e3d;
+.aboutcontent-point p{
+    font-size: 1.1rem;
 }
 
-#objectivesection{
-    min-height: 100vh;
-    background-color: #F4F5FC;
+#aboutsection{
+    background-color: #18928a16;
 }
 
 #objectivesection #objectivebox{
-    width: 100%;
-    height: max-content;
     display: flex;
-    justify-content: center;
-    gap: 2vw;
-    align-items: center;
+    padding: 5vmax 10vmax;
+    gap: 3vmax;
 }
 
-#objectivesection #objectivebox .obox{
-    width: 22vw;
-    height:55vh;
-    border-radius: 10px;
-    overflow: hidden;
-    padding: 2vh 1vw;
+#objectivebox .obox{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 2vh;
     align-items: center;
-    border: 1px solid #b2dedb;
-    box-shadow: 2px 2px 5px #b2dedb7e;
-}
-
-#objectivesection #objectivebox .obox i{
-    font-size: 4rem;
-    background-color: white;
-    border-radius: 5px;
-    padding: 2vh;
-
-}
-
-#objectivesection #objectivebox .obox h1{
-    font-size: 1.5rem;
-}
-
-#objectivesection #objectivebox .obox p{
-    font-size: 1rem;
+    background-color: #ffffff;
+    padding: 5vw 3vw;
+    border-radius: 20px;
     text-align: center;
-}
-
-#contactsection{
-    min-height: max-content;
-}
-
-#contactsection #details{
-    width: 100%;
-    height: max-content;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 3vw;
-    padding: 4vh 0;
-}
-
-#contactsection #details .detail-box{
-    border: 1px solid #b2dedb;
-    width: 20vw;
-    height: 20vh;
-    border-radius: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1vh;
-    box-shadow: #b2dedb7e 2px 2px 5px;
-    padding: 1vh 1vw;
-    text-align: center;
-}
-
-a{
-    color: black;
-    text-decoration: none;
-}
-
-
-#contactsection #details .detail-box i{
-    font-size: 3rem;
-    color: #0D5E59;
-}
-
-#contactsection #mapandform{
-    width: 100%;
-    height: max-content;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 3vw;
-    padding: 3vh 0;
-}
-
-#contactsection #mapandform #map{
-    width: 40%;
-    height: 50vh;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-#contactsection #mapandform #contactform{
-    width: 40%;
-    height: 100%;
-}
-
-#contactsection #mapandform form{
-    display: flex;
-    flex-direction: column;
-    gap: 1vh;
-    padding: 0% 20%;
-}
-
-#contactsection #mapandform form input{
-    border: 1px solid #b2dedb;
-    padding: 1vh;
-}
-
-#contactsection #mapandform form textarea{
-    border: 1px solid #b2dedb;
-    padding: 1vh;
-    resize: none;
-}
-
-#contactsection #mapandform #map iframe{
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
-footer{
-    width: 100%;
-    height: 50vh;
-    background-color: #F4F5FC;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-footer #address{
-    width: 100%;
-    height: 45vh;
-    display: flex;
-    flex-direction: column;
     gap: 3vh;
-    padding: 3vh 5vw;
+    border: 2px solid #0D5E59;
+    box-shadow: 5px 5px 10px 1px #0d5e5917;
 }
 
-footer #address h1{
-    color: #0D5E59;
+.obox i{
+    font-size: 2rem;
+    border: 2px solid #0D5E59;
+    padding: 1vmax;
+    border-radius: 20px;
 }
 
-footer #madeby{
-    width: 100%;
-    height: 5vh;
+#details {
     display: flex;
-    align-items: center;
-    padding-left: 3vw;
-    border-top: 1px solid #b2dedb;
-    font-size: 1rem;
+    padding: 5vmax 10%;
+    gap: 3vmax;
 }
 
-footer #madeby i{
-    font-size: 1.1rem;
-    color: red;
+.detail-box {
+    padding: 5%;
+    background-color: #18928a16;
+    border-radius: 20px;
+    text-align: center;
+    border: 2px solid #0D5E59;
+    box-shadow: 5px 5px 10px 1px #0d5e5915;
+    min-width: 20vw;
 }
 
-
-
-#products-section{
-    width: 100%;
-    height: max-content;
-    background-color: #10847e22 ;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#products-section #products{
-    width: 100%;
-    height: max-content;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-}
-
-#products-section #products #products-controles{
-    width: 100%;
-    height: max-content;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 3vw;
-    padding: 3vh 5vw;
-}
-
-#products-section #products #products-controles #search{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1vw;
-}
-
-#products-section #products #products-controles #search > input{
-    width: 25vw;
-    padding: 1.5vh 1vw;
-    border: 1px solid #b2dedb;
-    border-radius: 30px;
-    font-size: 1rem;
-}
-
-#products-section #products #products-controles #search i{
-    color: #0D5E59;
+.detail-box i{
     font-size: 2rem;
 }
 
-#products-section #products #products-list{
-    width: 80%;
-    height: max-content;
+#mapandform{
+    min-height: 50vh;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2vw;
-    margin-bottom: 10vh;
+    padding: 5vmax 10vmax;
+    gap: 3vmax;
 }
 
-#products-section #products #products-list #product{
-    overflow: hidden;
-    border-radius: 20px;
-    border: 1px solid #b2dedb;
+#mapandform *{
+    width: 50%;
 }
 
-#products-section #products #products-list #product:hover{
-    box-shadow: 2px 2px 10px #b2dedba8;
-}
-
-#products-section #products #products-list a{
-    width: 15vw;
+iframe{
+    border: 1px solid #0D5E59;
     height: 40vh;
+    border-radius: 5px;
+}
+
+form{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 4vh 1vw;
-    gap: 3vh;
-}
-
-#products-section #products #products-list #product img{
-    width: 80%;
-    object-fit: contain;
-}
-
-
-#products-section #products #products-controles #filter{
-    display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1vw;
-    width: 30vw;
-    flex-wrap: wrap;
-    padding: 1vh 1vw;
+    gap: 3%;
+    height: 40vh;
+    background-color: #EBF6F5;
+    border-radius: 10px;
+}
+
+form > input, textarea{
+    border: 1px solid #0D5E59;
+    padding: 1vmin;
+    min-width: 90%;
+}
+
+form *::placeholder{
+    color: #0D5E59;
+}
+
+#mapandform form button{
+    background-color: #0D5E59;
+    border: none;
+    color: white;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    width: max-content;
+    padding: 1vmax 2vmax;
 }
 
 
 
-
-.card {
-    width: 40vw;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+textarea{
+    resize: none;
 }
 
-
-h2 {
-    text-align: center;
-    color: #333;
-}
-.card>*{
-    margin: 2vw 0;
+footer{
+    background-color: #EBF6F5;
 }
 
-form {
+#address{
+    padding: 3vmax 3%;
     display: flex;
     flex-direction: column;
+    gap: 3vmax;
+    justify-content: center;
 }
 
-input {
-    padding: 10px;
-    margin-bottom: 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    transition: border-color 0.3s ease-in-out;
-    outline: none;
-    color: #333;
-}
-
-input:focus {
-    border-color: #0D5E59;
-}
-
-button {
+#madeby{
     background-color: #0D5E59;
-    color: #fff;
-    padding: 1vh 1vw;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
+    color: black;
     font-size: 1.2rem;
+    padding: 1vmin 5%;
 }
 
-button:hover {
-    box-shadow: 2px 2px 2px 1px #043f3b;
+#madeby i{
+    color: red;
+}
+
+#madeby a{
+    color: white;
 }
 
 
 
-/* Media Queries */
 
-@media (width< 576px) {
-    header{
-        position: relative;
-        top: 0;
-    }
 
-    #contact{
-        padding: 0 5vw;
-    }
+
+@media (width>=320px) and (width<=480px) {
 
     #social{
         display: none;
     }
 
-    nav{
-        padding: 0 5vw;
-    }
-
-    nav #logo{
-        width: 50vw;
-    }
-
-    nav #menu{
-        display: none;
-    }
-
-    nav i{
+    #menuicon {
         display: block;
-        font-size: 2rem;
     }
 
-    #herosection{
-        height: 50vh;
-    }
-
-    #heroimage{
-        height: 50vh;
-    }
-
-    #herocontent{
-        height: 50vh;
-    }
-
-    button{
-        font-size: 1rem;
-        padding: 2vh 4vw;
-    }
-
-    section .heading  #buttonhead{
-        padding:2vh 4vw;
+    #menu {
+        display: none;
     }
 
     #about{
         flex-direction: column;
     }
 
-    #about #aboutimg{
-        width: 80%;
-        height: 40vh;
+    #aboutimg{
+        width: 80vw;
+        height: 50vh;
+        position: relative;
     }
 
-    #about #aboutcontent{
-        width: 80%;
+    #aboutimg .layer{
+        background-color: #0d5e5944;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+    }
+    
+    
+    #aboutcontent{
+        width: 80vw;
         height: max-content;
+        gap: 5vh;
+        padding: 5vh 0;
         text-align: center;
-        padding: 3vh 0;
+    }
+
+    section .heading{
+        padding: 5vw;
     }
 
     #objectivesection #objectivebox{
         flex-direction: column;
-        gap: 3vh;
     }
 
-    #objectivesection #objectivebox .obox{
-        width: 80%;
-        height: max-content;
+    .obox i{
+        padding: 2vmax;
     }
 
-    #contactsection #details{
+    #details{
         flex-direction: column;
-        gap: 3vh;
-        padding: 3vh 0;
     }
 
-    #contactsection #details .detail-box{
-        width: 80%;
-        height: max-content;
-        padding: 2vh;
-    }
-
-    #contactsection #mapandform{
+    #mapandform{
         flex-direction: column;
-        gap: 3vh;
-        padding: 3vh 0;
+        align-items: center;
+        padding: 5%;
     }
-    
 
-    #contactsection #mapandform #map{
+    #mapandform  *{
         width: 90%;
+    }
+}
+
+@media (width>=481px) and (width<=768px) {
+
+    #social{
+        display: none;
+    }
+
+    #menuicon {
+        display: block;
+    }
+
+    #menu {
+        display: none;
+    }
+
+    #about{
+        flex-direction: column;
+    }
+
+    #aboutimg{
+        width: 80vw;
         height: 50vh;
     }
-
-    #contactsection #mapandform #contactform{
-        width: 90%;
-        background-color: #10847E2f;
-        padding: 10% 5%;
-        border-radius: 5%;
-    }
-
-    #contactsection #mapandform form{
-        padding: 0% 5%;
-    }
-
     
+    
+    #aboutcontent{
+        width: 80vw;
+        height: max-content;
+        gap: 5vh;
+        padding: 5vh 0;
+        text-align: center;
+    }
+
+    section .heading{
+        padding: 10vw;
+    }
+
+    #objectivesection #objectivebox{
+        flex-direction: column;
+    }
+
+    .obox i{
+        padding: 2vmax;
+    }
+
+    #details{
+        flex-direction: column;
+    }
+
+    #mapandform{
+        flex-direction: column;
+        align-items: center;
+        padding: 8%;
+    }
+
+    #mapandform *{
+        width: 80%; ;
+    }
 }

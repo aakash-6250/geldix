@@ -17,6 +17,12 @@ menu.addEventListener('click', function() {
     }
 });
 
+window.addEventListener("load", function() {
+    document.querySelector(".loader-wrapper").style.display = "none";
+    document.querySelector("main").style.display = "block";
+});
+
+
 
 // async function allproducts() {
 //     await fetch('/api/products')
