@@ -80,7 +80,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 0 5%;
-
+    position: relative;
 }
 
 nav img {
@@ -99,25 +99,46 @@ nav img {
     font-size: 1.5rem;
 }
 
+#dropdownmenu{
+    display: none;
+    position: absolute;
+    width: 40%;
+    height: max-content;
+    top: 13vh;
+    right: 10vw;
+    background-color: #0d5e595a;
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    padding: 1vmax 2vmax;
+    z-index: 999;
+    font-weight: 700;
+}
+
+#dropdownmenu a{
+    color: white;
+    display: block;
+    padding: 1vmax;
+}
+
 section {
     width: 100%;
     height: max-content;
 }
 
 #herosection{
-    min-height: 90vh;
+    min-height: 80vh;
     position: relative;
 }
 
 #herosection img {
     width: 100%;
-    height: 90vh;
+    height: 80vh;
     object-fit: cover;
 }
 
 #herocontent{
     width: 100%;
-    height: 90vh;
+    height: 80vh;
     position: absolute;
     top: 0;
     background-color: #0d5e5949;
@@ -238,7 +259,7 @@ section .heading> #btn-heading{
 }
 
 .detail-box {
-    padding: 5%;
+    padding: 5% 1%;
     background-color: #18928a16;
     border-radius: 20px;
     text-align: center;
@@ -268,23 +289,24 @@ iframe{
     border-radius: 5px;
 }
 
-form{
+#contactform{
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
+    gap: 3%;
     height: 40vh;
     background-color: #EBF6F5;
     border-radius: 10px;
 }
 
-form > input, textarea{
+#contactform > input, textarea{
     border: 1px solid #0D5E59;
     padding: 1vmin;
     min-width: 90%;
 }
 
-form *::placeholder{
+#contactform *::placeholder{
     color: #0D5E59;
 }
 
@@ -329,6 +351,110 @@ footer{
 
 #madeby a{
     color: white;
+}
+
+#products{
+    background-color: #18928a16;
+}
+
+#products-controls{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5vmax 10vmax;
+    gap: 3vmax;
+}
+
+#searchform{
+    width: 100%;
+    display: flex;
+    gap: 2vmax;
+}
+
+#products-controls #search{
+    display: flex;
+    align-items: center;
+    height: 5vh;
+    width: 40vw;
+}
+
+#search input{
+    width: 85%;
+    padding: 1vmin;
+    border: none;
+    border-radius: 20px;
+}
+
+#search button{
+    color: #0D5E59;
+    font-size: 1.6rem;
+    background-color: transparent;
+    border: none;
+}
+
+#filters{
+    width: 60vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#filters a{
+    background-color: #0D5E59;
+    color: white;
+    padding: 1vmin 1vmax;
+    margin: 1vh;
+    border-radius: 30px;
+}
+
+#products-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 5vmax;
+    gap: 3vmax;
+
+}
+
+#products-list .product{
+    width: 200px;
+    height: 340px;
+    border-radius: 5px;
+    overflow: hidden;
+    text-align: center;
+    border: 2px solid #0d5e598a;
+    background-color: rgba(255, 255, 255, 0.273);
+    padding: 1vmax;
+}
+
+.product #product-image{
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+}
+
+.product img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-color: white;
+}
+
+.product img:hover{
+    transform: scale(1.3);
+    transition: 0.5s ease;
+}
+
+
+.product h4{
+    padding: 10px 0;
+    font-size: 1.2rem;
+}
+
+.product p{
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 
@@ -383,7 +509,6 @@ footer{
 
     #objectivesection #objectivebox{
         flex-direction: column;
-        padding: 5vmax 5vmax;
     }
 
     .obox i{
@@ -402,6 +527,36 @@ footer{
 
     #mapandform  *{
         width: 90%;
+    }
+
+    #dropdownmenu{
+        width: 80%;
+        right: 10%;
+    }
+
+    #products-controls{
+        flex-direction: column;
+    }
+
+    #products-controls{
+        flex-direction: column;
+    }
+
+    #products-controls #search{
+        width: 90vw;
+    }
+
+    #filters{
+        width: 90vw;
+    }
+
+    #searchform{
+        width: 100%;
+    }
+
+    #products-list .product{
+        width: 65vw;
+        height: 400px;
     }
 }
 
@@ -461,5 +616,21 @@ footer{
 
     #mapandform *{
         width: 80%; ;
+    }
+
+    #products-controls{
+        flex-direction: column;
+    }
+
+    #products-controls #search{
+        width: 90vw;
+    }
+
+    #filters{
+        width: 90vw;
+    }
+
+    #searchform{
+        width: 100%;
     }
 }

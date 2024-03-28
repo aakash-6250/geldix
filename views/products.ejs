@@ -25,63 +25,59 @@
     <main>
         <%- include('header') %>
 
-            <section id="products-section">
-                <div class="heading">
-                    <p id="buttonhead">Products</p>
-                    <h1>Check our <span>Products</span></h1>
-                    <p>Each and every products delivered by us are fine-tuned for perfection and efficiency.</p>
-                </div>
-                <div id="products">
-                    <div id="products-controles">
-                        <div id="search">
+        <section id="products-section">
+            <div class="heading">
+                <p id="btn-heading">Products</p>
+                <h1>Check our <span>Products</span></h1>
+                <p>Each and every products delivered by us are fine-tuned for perfection and efficiency.</p>
+            </div>
+            <div id="products">
+                <div id="products-controls">
+                    <div id="search">
+                        <form id="searchform" action="">
                             <input type="text" placeholder="Search Products">
-                            <a href="/search"><i class="ri-search-line"></i></a>
-                        </div>
-                        <div id="filter">
-                            <button>All</button>
-                            <button>Tablets</button>
-                            <button>Capsules</button>
-                            <button>Syrups</button>
-                            <button>Injectables</button>
-                            <button>Ointments</button>
-                            <button>All</button>
-                            <button>Tablets</button>
-                            <button>Capsules</button>
-                            <button>Syrups</button>
-                            <button>Injectables</button>
-                            <button>Ointments</button>
-                            <button>All</button>
-                            <button>Tablets</button>
-                            <button>Capsules</button>
-                            <button>Syrups</button>
-                            <button>Injectables</button>
-                            <button>Ointments</button>
-                        </div>
+                            <button><i class="ri-search-line"></i></button>
+                        </form>
                     </div>
-                    <div id="products-list">
-                        <div id="products-list">
-                            <% products.map(product => { %>
-                                <div id="product">
-                                    <a href="/product/<%= product._id %>">
-                                        <img src="<%= product.image %>" alt="<%= product.name %>">
-                                        <h4 id="product-name">
-                                            <%= product.name %>
-                                        </h4>
-                                        <p id="discounted-price">
-                                            <%= product.description %>
-                                        </p>
-                                    </a>
-                                </div>
-                            <% }); %>
-                        </div>
-                        
+                    <div id="filters">
+                        <a href="#">Tablets</a>
+                        <a href="#">Capsules</a>
+                        <a href="#">Syrups</a>
+                        <a href="#">Injectables</a>
+                        <a href="#">Ointments</a>
+                        <a href="#">Tablets</a>
+                        <a href="#">Capsules</a>
+                        <a href="#">Syrups</a>
+                        <a href="#">Injectables</a>
+                        <a href="#">Ointments</a>
+                        <a href="#">Tablets</a>
+                        <a href="#">Capsules</a>
+                        <a href="#">Syrups</a>
+                        <a href="#">Injectables</a>
+                        <a href="#">Ointments</a>
                     </div>
                 </div>
-            </section>
+                <div id="products-list">
+                    <% products.map(product => { %>
+                    <div class="product">
+                        <a href="/product/<%= product._id %>">
+                            <div id="product-image">
+                                <img src="<%= product.image %>" alt="<%= product.name %>">
+                            </div>
+                            <h4 id="product-name">
+                                <%= product.name %>
+                            </h4>
+                            <p id="discounted-price">
+                                <%= product.description %>
+                            </p>
+                        </a>
+                    </div>
+                    <% }); %>
+                </div>
+            </div>
+        </section>
 
-
-
-            <%- include('footer') %>
+        <%- include('footer') %>
     </main>
 
 
