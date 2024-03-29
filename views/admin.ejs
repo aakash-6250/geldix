@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Geldix Pharmaceuticals Private Limited</title>
+    <title>Admin Login</title>
     <meta name="description"
         content="Our objective is to provide high quality, affordable and innovative healthcare products to people across the globe. We are committed to our customers and partners and have a passion for technology and innovation.">
     <meta name="keywords"
@@ -23,22 +23,21 @@
     </div>
 
     <main>
-        <%- include('header') %>
-
-            <div class="card" alt="">
-                <h2>Admin Login</h2>
-                <form action="/api/login" method="post">
-                    <input type="text" id="username" name="username" placeholder="Username" required>
-                    <input type="password" id="password" name="password" placeholder="Password" required>
-                    <button type="submit">Login</button>
-                </form>
-            </div>
+        <section id="adminform">
+            <form id="login-form" action="/api/login" method="post">
+                <h1>Admin Login</h1>
+                <input type="text" id="username" name="username" placeholder="Username" required>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <div id="error-message" style="color: red; display: none;"></div>
+        </section>
     </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
         integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="/javascripts/script.js"></script>
+    <script src="/javascripts/admin.js"></script>
 
 </body>
 

@@ -31,7 +31,7 @@ apiController.register = async (req, res, next) => {
         const newUser = new Admin({ username, fullname });
         await newUser.setPassword(password);
         await newUser.save();
-        res.status(200).json({ status: true, message: 'User registered successfully' });
+        res.status(200).json({ status: true, message: 'User registered successfully' }).redirect;
     } catch (error) {
         console.error(error);
         res.status(500).json({ status: false, message: 'Internal Server Error' });
@@ -41,6 +41,8 @@ apiController.register = async (req, res, next) => {
 
 apiController.login = async (req, res, next) => {
     try {
+
+        console.log(req.body.username, req.body.password);
         passport.authenticate('local', (err, user, info) => {
             if (err) {
                 return res.status(500).json({ status: false, message: 'Internal Server Error' });
@@ -49,11 +51,13 @@ apiController.login = async (req, res, next) => {
             if (!user) {
                 return res.status(401).json({ status: false, message: 'Invalid credentials' });
             }
+            
 
             req.logIn(user, (err) => {
                 if (err) {
                     return res.status(500).json({ status: false, message: 'Internal Server Error' });
                 }
+                
                 res.status(200).json({ status: true, message: 'Login successful' });
             });
         })(req, res, next);

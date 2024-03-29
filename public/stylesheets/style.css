@@ -318,6 +318,7 @@ iframe{
     font-size: 1.1rem;
     width: max-content;
     padding: 1vmax 2vmax;
+    cursor: pointer;
 }
 
 
@@ -390,6 +391,7 @@ footer{
     font-size: 1.6rem;
     background-color: transparent;
     border: none;
+    cursor: pointer;
 }
 
 #filters{
@@ -448,13 +450,53 @@ footer{
 
 
 .product h4{
-    padding: 10px 0;
+    padding: 15px 0;
     font-size: 1.2rem;
 }
 
 .product p{
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+
+#adminform{
+    width: 100%;
+    height: 100vh;
+}
+
+#adminform form{
+    background-color: #EBF6F5;
+    width: 40vw;
+    height: max-content;
+    padding: 5vmin;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid #0D5E59;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 3vmin;
+    text-align: center;
+}
+
+#adminform input{
+    padding: 1vmin;
+}
+
+#adminform button{
+    background-color: #0D5E59;
+    width: max-content;
+    color: white;
+    padding: 1vmin 2vmax;
+    border: none;
+    border-radius: 20px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
 }
 
 
@@ -558,6 +600,10 @@ footer{
         width: 65vw;
         height: 400px;
     }
+
+    #adminform form{
+        width: 80vw;
+    }
 }
 
 @media (width>=481px) and (width<=768px) {
@@ -632,5 +678,9 @@ footer{
 
     #searchform{
         width: 100%;
+    }
+
+    #adminform form{
+        width: 60vw;
     }
 }
