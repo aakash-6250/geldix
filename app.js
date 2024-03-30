@@ -43,8 +43,8 @@ app.use(flash());
 
 
 // Middleware for parsing request bodies
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.urlencoded({ extended: true, limit: '10mb'}));
+app.use(express.json({limit: '10mb'}));
 
 // Mount api routes
 app.use('/api/', apiRoutes);

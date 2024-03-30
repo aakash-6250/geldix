@@ -29,17 +29,21 @@
                 <div id="products">
                     <div id="products-list">
                         <div id="products-list">
-                                <div id="product">
-                                    <a href="/product/<%= product._id %>">
-                                        <img src="<%= product.image %>" alt="<%= product.name %>">
-                                        <h4 id="product-name">
-                                            <%= product.name %>
-                                        </h4>
-                                        <p id="discounted-price">
-                                            <%= product.description %>
-                                        </p>
-                                    </a>
-                                </div>
+                            <div class="product" style="height: max-content; width: 50vw;">
+                                <a href=/product/<%= product._id %>>
+                                    <div id="product-image" style="height:50vh;">
+                                        <img src=<%= product.image %> alt="<%= product.name %>">
+                                    </div>
+                                    <h4 id="product-name">
+                                        <%= product.name %>
+                                    </h4>
+                                    <p id="discounted-price">
+                                        <%= product.description %>
+                                    </p>
+                                </a>
+
+                                
+                            </div>
                         </div>
                         
                     </div>

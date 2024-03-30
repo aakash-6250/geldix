@@ -17,6 +17,8 @@
 
 
     <div id="main">
+        
+        <div id="messageContainer"></div>
         <div id="logo">
             <h1>Geldix</h1>
         </div>
@@ -37,10 +39,10 @@
             <div id="createProductForm" class="form-container">
                 <h2>Create Product</h2>
                 <form action="/api/add" enctype="multipart/form-data" method="post" id="createForm">
-                    <label for="productName">Product Name:</label>
-                    <input type="text" id="productName" name="name" required><br><br>
-                    <label for="productdescription">Product desctiption:</label>
-                    <input type="text" id="productdescription" name="description" required><br><br>
+                    <label for="addproductname">Product Name:</label>
+                    <input type="text" id="addproductname" name="name" required><br><br>
+                    <label for="addproductdescription">Product desctiption:</label>
+                    <input type="text" id="addproductdescription" name="description" required><br><br>
                     <label for="image">Image</label>
                     <input type="file" id="image" name="image" accept=".jpg, .png, .webp, .jpeg" required ><br>
                     <button type="submit">Submit</button>
@@ -50,12 +52,13 @@
             <div id="updateProductForm" class="form-container">
                 <h2>Update Product</h2>
                 <form action="" enctype="multipart/form-data" method="post" id="updateForm">
-                    <label for="productName">Product Name:</label>
-                    <input type="text" id="productName" name="name" required><br><br>
-                    <label for="productdescription">Product desctiption:</label>
-                    <input type="text" id="productdescription" name="description" required><br><br>
+                    <label for="updateproductname">Product Name:</label>
+                    <input type="text" id="updateproductname" name="name" value="" required><br><br>
+                    <label for="updateproductdescription">Product desctiption:</label>
+                    <input type="text" id="updateproductdescription" name="description" value="" required><br><br>
                     <label for="image">Image</label>
                     <input type="file" id="image" name="image" accept=".png, .jpg, .jpeg, .webp" required><br><br>
+                    <input type="hidden" name="productid" id="updateproductid" name="id" value="">
                     <button type="submit">Submit</button>
                 </form>
             </div>

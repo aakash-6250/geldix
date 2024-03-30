@@ -6,13 +6,75 @@ function showCreateForm() {
 
 }
 
-function showUpdateForm(productid) {
+document.getElementById('createForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const formData = new FormData(this);
+
+
+    fetch('/api/add', {
+        method: 'POST',
+        body: formData,
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            showMessage(data.message, 4000);
+            document.getElementById('createForm').reset();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+});
+
+
+async function showUpdateForm(productid) {
     document.getElementById("updateProductForm").style.display = "block";
     document.getElementById("createProductForm").style.display = "none";
     document.getElementById("allproducts").style.display = "none";
     var form = document.getElementById("updateForm");
-    form.action = `/api/update/${productid}`;
+    
+    try {
+        const response = await fetch(`/api/product/${productid}`);
+        const product = await response.json();
+        
+        document.getElementById("updateproductname").value = product.name;
+        document.getElementById("updateproductdescription").value = product.description;
+        document.getElementById("updateproductid").value = product._id;
+    } catch (error) {
+        console.error('Error fetching product:', error);
+    }
 }
+
+document.getElementById('updateForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const formData = new FormData(this);
+    const productid = formData.get('productid');
+    fetch(`/api/update/${productid}`, {
+        method: 'POST',
+        body: formData,
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            showMessage(data.message, 4000);
+            document.getElementById('updateForm').reset();
+            allproducts();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+});
+
 
 function deleteProduct(productid) {
     fetch(`/api/delete/${productid}`, {
@@ -73,6 +135,18 @@ async function logout() {
         console.error('Error logging out:', error);
     }
 }
+
+function showMessage(message, duration) {
+    const messageContainer = document.getElementById('messageContainer');
+    const messageElement = document.createElement('div');
+    messageElement.textContent = message;
+    messageContainer.appendChild(messageElement);
+
+    setTimeout(() => {
+        messageContainer.removeChild(messageElement);
+    }, duration);
+}
+
 
 onload = allproducts;
 

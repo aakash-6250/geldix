@@ -19,8 +19,13 @@ router.get('/products', async function(req, res, next) {
 
 // product page
 router.get('/product/:id', async function(req, res, next) {
-  const product=await Product.findById(req.params.id);
-  res.render('product',{product:product})
+  try {
+    const product = await Product.findOne({ _id: req.params.id });
+    res.render('product', { product: product });
+  } catch (error) {
+    console.error('Error fetching product:', error);
+    res.status(500).send('Error fetching product');
+  }
 });
 
 //Register page

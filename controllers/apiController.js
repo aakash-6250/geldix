@@ -241,8 +241,8 @@ apiController.allproducts = async (req, res, next) => {
 
 apiController.getProductById = async (req, res, next) => {
     try {
-        const id = req.params.id;
-        const product = await Product.findById(id).populate('user', 'fullname').exec();
+        const {id} = req.params;
+        const product = await Product.findById(id)
         if (product) {
             res.status(200).json(product);
         } else {
