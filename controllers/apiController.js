@@ -101,7 +101,11 @@ apiController.addproduct = async (req, res, next) => {
             return res.status(400).json({ status: false, message: 'Product description is required' });
         }
 
-        const { name, description } = req.body;
+        if(!req.body.category){
+            return res.status(400).json({ status: false, message: 'Product category is required' });
+        }
+
+        const { name, description, category } = req.body;
 
         try {
             const admin = await Admin.findOne({ username: req.session.passport.user });
@@ -131,6 +135,7 @@ apiController.addproduct = async (req, res, next) => {
                 const product = new Product({
                     name: name,
                     description: description,
+                    category: category,
                     user: admin.fullname,
                     image: `/images/products/${imageFilename}.webp`
                 });
@@ -151,6 +156,7 @@ apiController.addproduct = async (req, res, next) => {
         }
     });
 };
+
 apiController.updateproduct = async (req, res, next) => {
     upload(req, res, async function (err) {
         if (err) {
@@ -160,7 +166,7 @@ apiController.updateproduct = async (req, res, next) => {
 
         try {
             const { id } = req.params;
-            const { name, description } = req.body;
+            const { name, description, category } = req.body;
 
             const product = await Product.findById(id);
 
@@ -168,12 +174,13 @@ apiController.updateproduct = async (req, res, next) => {
                 return res.status(404).json({ status: false, message: 'Product not found' });
             }
 
-            if (!name && !description && !req.file) {
+            if (!name && !description && category && !req.file) {
                 return res.status(400).json({ status: false, message: 'No update data provided' });
             }
 
             if (name) product.name = name;
             if (description) product.description = description;
+            if (category) product.category = category;
 
             if (req.file) {
                 const imageFilename = req.file.filename.split('.')[0];

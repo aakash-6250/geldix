@@ -224,6 +224,13 @@ nav img {
     overflow: hidden;
 }
 
+.product-info > .category {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #0D5E59;
+    margin-bottom: 1vh;
+}
+
 .product-controls{
     width: 10%;
     height: 100%;

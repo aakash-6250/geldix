@@ -44,6 +44,7 @@ async function showUpdateForm(productid) {
 
         document.getElementById("updateproductname").value = product.name;
         document.getElementById("updateproductdescription").value = product.description;
+        document.getElementById("updateproductcategory").value = product.category;
         document.getElementById("updateproductid").value = product._id;
     } catch (error) {
         console.error('Error fetching product:', error);
@@ -106,6 +107,7 @@ async function allproducts() {
                         <div class="product-image"><img src='${product.image}'></div>
                         <div class="product-info">
                         <h1>${product.name}</h1>
+                        <p class="category">${product.category}</p>
                         <p>${product.description}</p>
                         </div>
                         <div class="product-controls">

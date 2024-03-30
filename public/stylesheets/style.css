@@ -454,13 +454,18 @@ footer{
 
 
 .product h4{
-    padding: 15px 0;
+    padding: 0.5rem 0;
     font-size: 1.2rem;
 }
 
 .product p{
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+#product-category{
+    color: #0D5E59;
+    margin-bottom:1rem;
 }
 
 
