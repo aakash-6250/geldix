@@ -37,11 +37,11 @@ async function showUpdateForm(productid) {
     document.getElementById("createProductForm").style.display = "none";
     document.getElementById("allproducts").style.display = "none";
     var form = document.getElementById("updateForm");
-    
+
     try {
         const response = await fetch(`/api/product/${productid}`);
         const product = await response.json();
-        
+
         document.getElementById("updateproductname").value = product.name;
         document.getElementById("updateproductdescription").value = product.description;
         document.getElementById("updateproductid").value = product._id;
@@ -95,17 +95,20 @@ async function allproducts() {
     await fetch('/api/products')
         .then(response => response.json())
         .then(data => {
-            const productList = document.getElementById('productlist');
+            const productList = document.getElementById('product-list');
             productList.innerHTML = '';
 
             if (data.length > 0) {
                 data.forEach(product => {
-                    const listItem = document.createElement('li');
+                    const listItem = document.createElement('div');
+                    listItem.className = 'product';
                     listItem.innerHTML += `
-                        <img src='${product.image}'>
+                        <div class="product-image"><img src='${product.image}'></div>
+                        <div class="product-info">
                         <h1>${product.name}</h1>
                         <p>${product.description}</p>
-                        <div>
+                        </div>
+                        <div class="product-controls">
                             <a onclick=showUpdateForm('${product._id}')>Update</a>
                             <a onclick=deleteProduct('${product._id}')>Delete</a>
                         </div>
@@ -113,7 +116,7 @@ async function allproducts() {
                     productList.appendChild(listItem);
                 });
             } else {
-                productList.innerHTML = '<li>No products found</li>';
+                productList.innerHTML = '<div>No products found</div>';
             }
         })
         .catch(error => console.error('Error fetching data:', error));

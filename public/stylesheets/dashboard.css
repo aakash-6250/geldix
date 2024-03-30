@@ -8,81 +8,259 @@
 
 
 
-body,html {
+body,
+html {
     width: 100%;
     height: 100vh;
     font-family: 'Noto Sans JP', 'Open Sans', sans-serif;
 }
 
-#main{
-    width: 100%;
-}
 
-#logo{
-    width: 100%;
-    height: 10vh;
-    background-color: #b8bcbb78;
-    z-index: 10;
-    backdrop-filter: blur(30px);
-    color: #1f9993;
+
+.loader-wrapper {
     position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
 }
 
-#logo>h1{
+.loader {
+    border: 8px solid #0d5e5929;
+    border-top: 8px solid #0D5E59;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+
+main {
+    width: 100%;
+    height: max-content;
+    display: none;
+}
+
+header {
+    width: 100%;
+    height: 13vh;
+    position: fixed;
+    z-index: 100;
+}
+
+#contact {
+    width: 100%;
+    height: 4vh;
+    background-color: #0D5E59;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+}
+
+#contact a {
+    color: white;
+}
+
+nav {
+    width: 100%;
+    height: 9vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    position: relative;
+    background-color: white;
+}
+
+nav img {
+    width: 160px;
+    height: 8vh;
+}
+
+#menu {
+    display: flex;
+    gap: 3vw;
+    font-size: 1.1rem;
+}
+
+#menuicon {
+    display: none;
+    font-size: 1.5rem;
+}
+
+#dropdownmenu {
+    display: none;
+    position: absolute;
+    width: 40%;
+    height: max-content;
+    top: 13vh;
+    right: 10vw;
+    background-color: #0d5e595a;
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    padding: 1vmax 2vmax;
+    z-index: 999;
+    font-weight: 700;
+}
+
+#dropdownmenu a {
+    color: white;
+    display: block;
+    padding: 1vmax;
+}
+
+
+#sidebar {
+    position: fixed;
+    z-index: 99;
+    top: 13vh;
+    width: 20vw;
+    height: 87vh;
+    background-color: #0D5E59;
+    display: flex;
+    flex-direction: column;
+}
+
+#sidebar h4 {
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: white;
+    cursor: pointer;
+    padding: 10px 30px;
+}
+
+#panel {
+    position: relative;
+    top: 13vh;
+    left: 20vw;
+    width: 80vw;
+    height: calc(100vh - 13vh);
+}
+
+#panel #allproducts {
+    width: 100%;
+}
+
+#allproducts h2 {
+    margin: auto;
+}
+
+#panel #allproducts #product-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#panel #allproducts #product-list>div {
+    width: 100%;
+    height: 35vh;
+    display: flex;
+    gap: 1vw;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(128, 128, 128, 0.1);
+    border-bottom: 1px solid #0D5E59;
+    padding: 1rem;
+}
+
+.product-image {
+    min-width: 25%;
+    max-width: 25%;
+    height: 100%;
+    background-color: white;
+    overflow: hidden;
+}
+
+.product-image>img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 0.5rem;
+}
+
+.product-image>img:hover {
+    transform: scale(1.3);
+    transition: 0.5s ease;
+}
+
+.product-info{
+    height: 100%;
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    overflow: hidden;
+}
+
+.product-controls{
+    width: 10%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4vh;
+    align-items: center;
+}
+
+.product-controls a {
+    background-color: #0D5E59;
+    color: white;
+    padding: 1vmin 2vmin;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#createProductForm {
+    display: none;
+}
+
+#updateProductForm {
+    display: none;
+}
+
+.form-container {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
-    padding-left: 3vw;
-    font-size: 3vw;
-    font-weight: 600;
-}
-
-#menu{
-    width: 10vw;
-    height: 90vh;
-    background-color: #1f9993;
-    position: fixed;
-    top: 10vh;
-}
-
-#menu ul li{
-    border-bottom: 2px solid white;
-    padding: 4vh 0;
-    color: white;
-    cursor: pointer;
-}
-
-#content{
-    width: 90vw;
-    position: relative;
-    left: 10vw;
-    top: 10vh;
-}
-
-
-#createProductForm{
-    display: none;
-}
-
-#updateProductForm{
-    display: none;
-}
-
-.form-container{
-    width: 100%;
+    margin: auto;
+    width: 80%;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
-    text-align: center;
+form h2 {
+    margin: auto;
     color: #333;
     width: max-content;
 }
 
-.form-container>*{
+.form-container>* {
     margin: 2vw 0;
 }
 
@@ -123,68 +301,13 @@ button:hover {
     box-shadow: 2px 2px 2px 1px #1f99935a;
 }
 
-#allproducts{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
-#allproducts ul {
-    width: 100%;
-}
-
-#allproducts ul li{
-    border: 1px solid #1f9993;
-    border-left: none;
-    border-right: none;
-    list-style: none;
-    height: 25vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-
-
-
-#allproducts h2{
-    padding: 3vh 0;
-    width: max-content;
-}
-
-#allproducts > h2::after{
-    content: "";
-    display: block;
-    width: 100%;
-    height: 4px;
-    border-radius: 10px;
-    background-color:#1f9993;
-}
-
-#allproducts ul li:first-child{
-    border-top: 0px;
-}
-
-#allproducts ul li img{
-    height: 100%;
-}
-
-#allproducts ul li div a{
-    text-decoration: none;
-    color: white;
-    background-color: #1f9993;
-    display: flex;
-    margin: 10px 0;
-    padding: 5px 10px;
-    border-radius: 20px;
-}
-
-#messageContainer{
+#messageContainer {
     z-index: 100;
     position: relative;
 }
 
-#messageContainer > div{
+#messageContainer>div {
     position: absolute;
     right: 5vw;
     top: 12vh;
@@ -193,4 +316,58 @@ button:hover {
     background-color: #1f9993;
     padding: 2vmin;
     border-radius: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+@media (width>=320px) and (width<=480px) {
+
+    #social{
+        display: none;
+    }
+
+    #menuicon {
+        display: block;
+    }
+
+    #menu {
+        display: none;
+    }
+
+    #dropdownmenu{
+        width: 80%;
+        right: 10%;
+    }
+
+
+
+}
+
+
+
+
+@media (width>=481px) and (width<=768px) {
+
+    #social{
+        display: none;
+    }
+
+    #menuicon {
+        display: block;
+    }
+
+    #menu {
+        display: none;
+    }
+
+
+
 }

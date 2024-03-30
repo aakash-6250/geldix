@@ -6,64 +6,65 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geldix Pharmaceuticals Private Limited</title>
-    <meta name="description" content="Our objective is to provide high quality, affordable and innovative healthcare products to people across the globe. We are committed to our customers and partners and have a passion for technology and innovation.">
-    <meta name="keywords" content="geldix, geldix pharmaceutical, geldix pharmaceuticals, geldix pharmaceuticals private limited, geldix pharama, bhim singh, seema patel">
+    <meta name="description"
+        content="Our objective is to provide high quality, affordable and innovative healthcare products to people across the globe. We are committed to our customers and partners and have a passion for technology and innovation.">
+    <meta name="keywords"
+        content="geldix, geldix pharmaceutical, geldix pharmaceuticals, geldix pharmaceuticals private limited, geldix pharama, bhim singh, seema patel">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="preload" href="/stylesheets/dashboard.css" as="style">
     <link rel="stylesheet" href="/stylesheets/dashboard.css">
 </head>
 
 <body>
 
-
-    <div id="main">
-        
-        <div id="messageContainer"></div>
-        <div id="logo">
-            <h1>Geldix</h1>
-        </div>
-        <div id="menu">
-            <ul>
-                <li onclick="allproducts()">All Products</li>
-                <li onclick="showCreateForm()">Add Products</li>
-                <li onclick="logout()">Logout</li>
-            </ul>
-        </div>
-        <div id="content">
-
-            <div id="allproducts">
-                <h2>Product List</h2>
-                <ul id="productlist"></ul>
-            </div>
-
-            <div id="createProductForm" class="form-container">
-                <h2>Create Product</h2>
-                <form action="/api/add" enctype="multipart/form-data" method="post" id="createForm">
-                    <label for="addproductname">Product Name:</label>
-                    <input type="text" id="addproductname" name="name" required><br><br>
-                    <label for="addproductdescription">Product desctiption:</label>
-                    <input type="text" id="addproductdescription" name="description" required><br><br>
-                    <label for="image">Image</label>
-                    <input type="file" id="image" name="image" accept=".jpg, .png, .webp, .jpeg" required ><br>
-                    <button type="submit">Submit</button>
-                </form>
-            </div>
-
-            <div id="updateProductForm" class="form-container">
-                <h2>Update Product</h2>
-                <form action="" enctype="multipart/form-data" method="post" id="updateForm">
-                    <label for="updateproductname">Product Name:</label>
-                    <input type="text" id="updateproductname" name="name" value="" required><br><br>
-                    <label for="updateproductdescription">Product desctiption:</label>
-                    <input type="text" id="updateproductdescription" name="description" value="" required><br><br>
-                    <label for="image">Image</label>
-                    <input type="file" id="image" name="image" accept=".png, .jpg, .jpeg, .webp" required><br><br>
-                    <input type="hidden" name="productid" id="updateproductid" name="id" value="">
-                    <button type="submit">Submit</button>
-                </form>
-            </div>
-        </div>
+    <div class="loader-wrapper">
+        <div class="loader"></div>
     </div>
+
+    <main>
+        <%- include('header') %>
+            <div id="messageContainer"></div>
+            <div id="sidebar">
+                <h4 onclick="allproducts()">All Products</h4>
+                <h4 onclick="showCreateForm()">Add Products</h4>
+                <h4 onclick="logout()">Logout</h4>
+            </div>
+
+            <div id="panel">
+                <div id="allproducts">
+                    <h2>Products List</h2>
+                    <div id="product-list"></div>
+                </div>
+
+                <div id="createProductForm" class="form-container">
+                    <form action="/api/add" enctype="multipart/form-data" method="post" id="createForm">
+                        <h2>Create Product</h2>
+                        <label for="addproductname">Product Name:</label>
+                        <input type="text" id="addproductname" name="name" required><br><br>
+                        <label for="addproductdescription">Product desctiption:</label>
+                        <input type="text" id="addproductdescription" name="description" required><br><br>
+                        <label for="image">Image</label>
+                        <input type="file" id="image" name="image" accept=".jpg, .png, .webp, .jpeg" required><br>
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+
+                <div id="updateProductForm" class="form-container">
+                    <form action="" enctype="multipart/form-data" method="post" id="updateForm">
+                        <h2>Update Product</h2>
+                        <label for="updateproductname">Product Name:</label>
+                        <input type="text" id="updateproductname" name="name" value="" required><br><br>
+                        <label for="updateproductdescription">Product desctiption:</label>
+                        <input type="text" id="updateproductdescription" name="description" value="" required><br><br>
+                        <label for="image">Image</label>
+                        <input type="file" id="image" name="image" accept=".png, .jpg, .jpeg, .webp" required><br><br>
+                        <input type="hidden" name="productid" id="updateproductid" name="id" value="">
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+    </main>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
@@ -71,6 +72,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="/javascripts/dashboard.js"></script>
+    <script src="/javascripts/script.js"></script>
 </body>
 
 </html>
