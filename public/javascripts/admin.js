@@ -10,7 +10,6 @@ document.getElementById('login-form').addEventListener('submit', async function(
     const formData = new FormData(this);
     const username = formData.get('username');
     const password = formData.get('password');
-
     try {
         const response = await fetch('/api/login', {
             method: 'POST',

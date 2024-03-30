@@ -42,7 +42,6 @@ apiController.register = async (req, res, next) => {
 apiController.login = async (req, res, next) => {
     try {
 
-        console.log(req.body.username, req.body.password);
         passport.authenticate('local', (err, user, info) => {
             if (err) {
                 return res.status(500).json({ status: false, message: 'Internal Server Error' });
