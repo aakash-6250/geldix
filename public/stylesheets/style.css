@@ -339,6 +339,10 @@ footer{
     justify-content: center;
 }
 
+#address a{
+    width: max-content;
+}
+
 #madeby{
     background-color: #0D5E59;
     color: black;
