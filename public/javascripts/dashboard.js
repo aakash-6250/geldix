@@ -10,6 +10,9 @@ document.getElementById('createForm').addEventListener('submit', function (event
     event.preventDefault();
 
     const formData = new FormData(this);
+    var submitBtn = document.getElementById('addSubmitBtn');
+
+    submitBtn.disabled = true;
 
 
     fetch('/api/add', {
@@ -25,6 +28,7 @@ document.getElementById('createForm').addEventListener('submit', function (event
         .then(data => {
             showMessage(data.message, 4000);
             document.getElementById('createForm').reset();
+            submitBtn.disabled = false;
             handlecategory();
         })
         .catch(error => {
@@ -55,6 +59,10 @@ async function showUpdateForm(productid) {
 document.getElementById('updateForm').addEventListener('submit', function (event) {
     event.preventDefault();
 
+    var submitBtn = document.getElementById('updateSubmitBtn');
+
+    submitBtn.disabled = true;
+
     const formData = new FormData(this);
     const productid = formData.get('productid');
     fetch(`/api/update/${productid}`, {
@@ -70,6 +78,7 @@ document.getElementById('updateForm').addEventListener('submit', function (event
         .then(data => {
             showMessage(data.message, 4000);
             document.getElementById('updateForm').reset();
+            submitBtn.disabled = false;
             allproducts();
             handlecategory();
         })
