@@ -12,8 +12,13 @@
         content="geldix, geldix pharmaceutical, geldix pharmaceuticals, geldix pharmaceuticals private limited, geldix pharama, bhim singh, seema patel">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="preload" href="/stylesheets/dashboard.css" as="style">
-    <link rel="stylesheet" href="/stylesheets/dashboard.css">
+    <link rel="preload" href="/stylesheets/dashboard.css" as="style"><link rel="stylesheet" href="/stylesheets/dashboard.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
 </head>
 
 <body>
@@ -36,18 +41,19 @@
                     <h2>Products List</h2>
                     <div id="product-list"></div>
                 </div>
+                    
 
                 <div id="createProductForm" class="form-container">
                     <form action="/api/add" enctype="multipart/form-data" method="post" id="createForm">
                         <h2>Create Product</h2>
                         <label for="addproductname">Product Name:</label>
-                        <input type="text" id="addproductname" name="name" required><br><br>
+                        <input type="text" id="addproductname" name="name" autocomplete="off" required><br><br>
                         <label for="addproductdescription">Product desctiption:</label>
-                        <input type="text" id="addproductdescription" name="description" required><br><br>
+                        <input type="text" id="addproductdescription" name="description" autocomplete="off" required><br><br>
                         <label for="addproductcategory">Product category:</label>
-                        <input type="text" id="addproductcategory" name="category" required><br><br>
-                        <label for="image">Image</label>
-                        <input type="file" id="image" name="image" accept=".jpg, .png, .webp, .jpeg" required><br>
+                        <input type="text" id="addproductcategory" class="productcategory" name="category" autocomplete="off" required><br><br>
+                        <label for="addimage">Image</label>
+                        <input type="file" id="addimage" name="image" accept=".jpg, .png, .webp, .jpeg" required><br>
                         <button type="submit">Submit</button>
                     </form>
                 </div>
@@ -56,20 +62,19 @@
                     <form action="" enctype="multipart/form-data" method="post" id="updateForm">
                         <h2>Update Product</h2>
                         <label for="updateproductname">Product Name:</label>
-                        <input type="text" id="updateproductname" name="name" value="" required><br><br>
+                        <input type="text" id="updateproductname" name="name" autocomplete="off" value="" ><br><br>
                         <label for="updateproductdescription">Product desctiption:</label>
-                        <input type="text" id="updateproductdescription" name="description" value="" required><br><br>
+                        <input type="text" id="updateproductdescription" name="description" autocomplete="off" value="" ><br><br>
                         <label for="updateproductcategory">Product category:</label>
-                        <input type="text" id="updateproductcategory" name="category" required><br><br>
-                        <label for="image">Image</label>
-                        <input type="file" id="image" name="image" accept=".png, .jpg, .jpeg, .webp" required><br><br>
+                        <input type="text" id="updateproductcategory" class="productcategory" name="category" autocomplete="off"><br><br>
+                        <label for="updateimage">Image</label>
+                        <input type="file" id="updateimage" name="image" accept=".png, .jpg, .jpeg, .webp"><br><br>
                         <input type="hidden" name="productid" id="updateproductid" name="id" value="">
                         <button type="submit">Submit</button>
                     </form>
                 </div>
             </div>
     </main>
-
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
         integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="

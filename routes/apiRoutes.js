@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const apicontroller = require('../controllers/apiController'); // Fix: Changed import statement to '../controllers/apiController'
+const apicontroller = require('../controllers/apiController');
 const upload = require('../controllers/multer');
 
 router.post('/login',isLoggedOut, apicontroller.login);
@@ -9,8 +9,11 @@ router.get('/logout', isLoggedIn,apicontroller.logout);
 router.post('/add',isLoggedIn,apicontroller.addproduct);
 router.post('/delete/:id', isLoggedIn,apicontroller.deleteproduct);
 router.post('/update/:id', isLoggedIn,apicontroller.updateproduct);
-router.get('/products',apicontroller.allproducts);
-router.get('/product/:id', apicontroller.getProductById);
+router.get('/products',isLoggedIn,apicontroller.getProducts);
+router.get('/categories',isLoggedIn,apicontroller.getCategories);
+router.get('/product/:id',isLoggedIn, apicontroller.getProductById);
+router.get('/product/category/:id',isLoggedIn, apicontroller.getProductsByCategory);
+router.get('/category/:id',isLoggedIn, apicontroller.getCategoryById);
 
 
 

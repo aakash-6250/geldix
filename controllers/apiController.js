@@ -2,6 +2,7 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const Admin = require('../models/Admin');
 const Product = require('../models/Product');
+const Category = require('../models/Category');
 const upload = require('./multer')
 const fs = require('fs');
 const sharp = require('sharp');
@@ -50,13 +51,13 @@ apiController.login = async (req, res, next) => {
             if (!user) {
                 return res.status(401).json({ status: false, message: 'Invalid credentials' });
             }
-            
+
 
             req.logIn(user, (err) => {
                 if (err) {
                     return res.status(500).json({ status: false, message: 'Internal Server Error' });
                 }
-                
+
                 res.status(200).json({ status: true, message: 'Login successful' });
             });
         })(req, res, next);
@@ -101,7 +102,7 @@ apiController.addproduct = async (req, res, next) => {
             return res.status(400).json({ status: false, message: 'Product description is required' });
         }
 
-        if(!req.body.category){
+        if (!req.body.category) {
             return res.status(400).json({ status: false, message: 'Product category is required' });
         }
 
@@ -112,6 +113,11 @@ apiController.addproduct = async (req, res, next) => {
             if (!admin) {
                 fs.unlinkSync(req.file.path);
                 return res.status(404).json({ status: false, message: 'Admin not found' });
+            }
+
+            let existingCategory = await Category.findOne({ name: category });
+            if (!existingCategory) {
+                existingCategory = new Category({ name: category, products: [] });
             }
 
             const imageFilename = req.file.filename.split('.')[0];
@@ -135,12 +141,16 @@ apiController.addproduct = async (req, res, next) => {
                 const product = new Product({
                     name: name,
                     description: description,
-                    category: category,
+                    category: existingCategory._id,
+                    categoryname: category,
                     user: admin.fullname,
                     image: `/images/products/${imageFilename}.webp`
                 });
 
                 await product.save();
+
+                existingCategory.products.push(product);
+                await existingCategory.save();
 
                 res.status(200).json({ status: true, message: 'Product added successfully' });
             });
@@ -174,13 +184,42 @@ apiController.updateproduct = async (req, res, next) => {
                 return res.status(404).json({ status: false, message: 'Product not found' });
             }
 
-            if (!name && !description && category && !req.file) {
+            let categoryChanged = false;
+            if (category && product.category.toString() !== category) {
+                categoryChanged = true;
+            }
+
+            if (!name && !description && !category && !req.file) {
                 return res.status(400).json({ status: false, message: 'No update data provided' });
             }
 
+
             if (name) product.name = name;
             if (description) product.description = description;
-            if (category) product.category = category;
+
+            if (categoryChanged) {
+                const previousCategory = await Category.findById(product.category);
+                if (previousCategory) {
+                    previousCategory.products.pull(product._id);
+                    if (previousCategory.products.length === 0) {
+                        await Category.findByIdAndDelete(previousCategory._id);
+                    } else {
+                        await previousCategory.save();
+                    }
+                }
+
+                let existingCategory = await Category.findOne({ name: category });
+                if (!existingCategory) {
+                    existingCategory = new Category({ name: category, products: [product._id] });
+                    await existingCategory.save();
+                }
+                else {
+                    existingCategory.products.push(product._id);
+                    await existingCategory.save();
+                }
+                product.category = existingCategory._id;
+                product.categoryname = category;
+            }
 
             if (req.file) {
                 const imageFilename = req.file.filename.split('.')[0];
@@ -199,10 +238,12 @@ apiController.updateproduct = async (req, res, next) => {
 
                 writeStream.on('close', async () => {
                     fs.unlinkSync(req.file.path);
-
+                    fs.unlinkSync(path.join(__dirname, '../', 'public', product.image));
                     product.image = `/images/products/${imageFilename}.webp`;
 
                     await product.save();
+
+
 
                     res.status(200).json({ status: true, message: 'Product updated successfully' });
                 });
@@ -227,8 +268,17 @@ apiController.updateproduct = async (req, res, next) => {
 apiController.deleteproduct = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const prod = await Product.findByIdAndDelete(id);
-        fs.unlinkSync(path.join(__dirname,"../", "public", prod.image));
+
+        const product = await Product.findById(id);
+        const category = await Category.findById(product.category);
+        category.products.pull(product._id);
+        if (category.products.length === 0) {
+            await Category.findByIdAndDelete(category._id);
+        } else {
+            await category.save();
+        }
+        fs.unlinkSync(path.join(__dirname, "../", "public", product.image));
+        await Product.findByIdAndDelete(id);
         res.json({ message: 'Product deleted successfully' });
     } catch (error) {
         console.error('Error deleting product:', error);
@@ -236,19 +286,31 @@ apiController.deleteproduct = async (req, res, next) => {
     }
 };
 
-apiController.allproducts = async (req, res, next) => {
+apiController.getProducts = async (req, res, next) => {
     try {
         const products = await Product.find();
         if (products) res.status(200).json(products);
+        else res.status(404).json({ message: 'No products found' });
     } catch (error) {
         console.error('Error fetching products:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
 
+apiController.getCategories = async (req, res, next) => {
+    try {
+        const categories = await Category.find();
+        if (categories) res.status(200).json(categories);
+        else res.status(404).json({ message: 'No categories found' });
+    } catch (error) {
+        console.error('Error fetching categories:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
 apiController.getProductById = async (req, res, next) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
         const product = await Product.findById(id)
         if (product) {
             res.status(200).json(product);
@@ -257,6 +319,34 @@ apiController.getProductById = async (req, res, next) => {
         }
     } catch (err) {
         console.error('Error fetching product by ID:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
+apiController.getProductsByCategory = async (req, res, next) => {
+    try {
+        const { category } = req.params;
+        const products = await Product.find({ category: category });
+        if (products) res.status(200).json(products);
+        else res.status(404).json({ message: 'No products found' });
+    }
+    catch (error) {
+        console.error('Error fetching products by category:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+apiController.getCategoryById = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const category = await Category.findById(id);
+        if (category) {
+            res.status(200).json(category);
+        } else {
+            res.status(404).json({ message: 'Category not found' });
+        }
+    } catch (err) {
+        console.error('Error fetching category by ID:', err);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };

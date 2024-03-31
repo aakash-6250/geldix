@@ -25,6 +25,7 @@ document.getElementById('createForm').addEventListener('submit', function (event
         .then(data => {
             showMessage(data.message, 4000);
             document.getElementById('createForm').reset();
+            handlecategory();
         })
         .catch(error => {
             console.error('Error:', error);
@@ -44,7 +45,7 @@ async function showUpdateForm(productid) {
 
         document.getElementById("updateproductname").value = product.name;
         document.getElementById("updateproductdescription").value = product.description;
-        document.getElementById("updateproductcategory").value = product.category;
+        document.getElementById("updateproductcategory").value = product.categoryname;
         document.getElementById("updateproductid").value = product._id;
     } catch (error) {
         console.error('Error fetching product:', error);
@@ -70,6 +71,7 @@ document.getElementById('updateForm').addEventListener('submit', function (event
             showMessage(data.message, 4000);
             document.getElementById('updateForm').reset();
             allproducts();
+            handlecategory();
         })
         .catch(error => {
             console.error('Error:', error);
@@ -82,7 +84,9 @@ function deleteProduct(productid) {
         method: 'POST'
     })
         .then(response => response.json())
-        .then(() => {
+        .then(data => {
+            showMessage(data.message, 4000);
+            handlecategory();
             allproducts();
         })
         .catch(error => {
@@ -107,7 +111,7 @@ async function allproducts() {
                         <div class="product-image"><img src='${product.image}'></div>
                         <div class="product-info">
                         <h1>${product.name}</h1>
-                        <p class="category">${product.category}</p>
+                        <p>${product.categoryname}</p>
                         <p>${product.description}</p>
                         </div>
                         <div class="product-controls">
@@ -151,6 +155,32 @@ function showMessage(message, duration) {
         messageContainer.removeChild(messageElement);
     }, duration);
 }
+
+var handlecategory = async () => {
+    try {
+        const response = await fetch('/api/categories');
+        const categorys = await response.json();
+        const categoryNames = categorys.map(category => category.name);
+
+        $(function() {
+            $("#addproductcategory").autocomplete({
+                source: categoryNames,
+                minLength: 0 
+            });
+
+            $("#updateproductcategory").autocomplete({
+                source: categoryNames,
+                minLength: 0 
+            });
+        });
+    } catch (error) {
+        console.error('Error handling categories:', error);
+    }
+};
+
+handlecategory();
+
+
 
 
 onload = allproducts;

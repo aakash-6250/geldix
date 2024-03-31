@@ -340,6 +340,7 @@ footer{
 }
 
 #address a{
+    display: inline;
     width: max-content;
 }
 
@@ -370,6 +371,7 @@ footer{
     gap: 3vmax;
 }
 
+
 #searchform{
     width: 100%;
     display: flex;
@@ -399,7 +401,7 @@ footer{
 }
 
 #filters{
-    width: 60vw;
+    width: max-content;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

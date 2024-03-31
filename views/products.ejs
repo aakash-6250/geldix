@@ -25,62 +25,50 @@
     <main>
         <%- include('header') %>
 
-        <section id="products-section">
-            <div class="heading">
-                <p id="btn-heading">Products</p>
-                <h1>Check our <span>Products</span></h1>
-                <p>Each and every products delivered by us are fine-tuned for perfection and efficiency.</p>
-            </div>
-            <div id="products">
-                <div id="products-controls">
-                    <div id="search">
-                        <form id="searchform" action="">
-                            <input type="text" placeholder="Search Products">
-                            <button><i class="ri-search-line"></i></button>
-                        </form>
-                    </div>
-                    <div id="filters">
-                        <a href="#">Tablets</a>
-                        <a href="#">Capsules</a>
-                        <a href="#">Syrups</a>
-                        <a href="#">Injectables</a>
-                        <a href="#">Ointments</a>
-                        <a href="#">Tablets</a>
-                        <a href="#">Capsules</a>
-                        <a href="#">Syrups</a>
-                        <a href="#">Injectables</a>
-                        <a href="#">Ointments</a>
-                        <a href="#">Tablets</a>
-                        <a href="#">Capsules</a>
-                        <a href="#">Syrups</a>
-                        <a href="#">Injectables</a>
-                        <a href="#">Ointments</a>
-                    </div>
+            <section id="products-section">
+                <div class="heading">
+                    <p id="btn-heading">Products</p>
+                    <h1>Check our <span>Products</span></h1>
+                    <p>Each and every products delivered by us are fine-tuned for perfection and efficiency.</p>
                 </div>
-                <div id="products-list">
-                    <% products.map(product => { %>
-                    <div class="product">
-                        <a href="/product/<%= product._id %>">
-                            <div id="product-image">
-                                <img src="<%= product.image %>" alt="<%= product.name %>">
+                <div id="products">
+                    <div id="products-controls">
+                        <div id="search">
+                            <form id="searchform" action="">
+                                <input type="text" placeholder="Search Products">
+                                <button><i class="ri-search-line"></i></button>
+                            </form>
+                        </div>
+                        <div id="filters">
+                            <% categorys.map(category=> { %>
+                                <a href="/products/category/<%= category._id %>">
+                                    <%= category.name %>
+                                </a>
+                            <% }); %>
+                        </div>
+                    </div>
+                    <div id="products-list">
+                        <% products.map(product=> { %>
+                            <div class="product">
+                                <a href="/product/<%= product._id %>">
+                                    <div id="product-image">
+                                        <img src="<%= product.image %>" alt="<%= product.name %>">
+                                    </div>
+                                    <h4 id="product-name">
+                                        <%= product.name %>
+                                    </h4>
+                                    <p id="discounted-description">
+                                        <%= product.description %>
+                                    </p>
+
+                                </a>
                             </div>
-                            <h4 id="product-name">
-                                <%= product.name %>
-                            </h4>
-                            <p id="product-category">
-                                <%= product.category %>
-                            <p id="discounted-description">
-                                <%= product.description %>
-                            </p>
-
-                        </a>
+                            <% }); %>
                     </div>
-                    <% }); %>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <%- include('footer') %>
+            <%- include('footer') %>
     </main>
 
 
