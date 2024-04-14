@@ -506,7 +506,7 @@ footer{
 
 
 
-@media (width>=320px) and (width<=480px) {
+@media  (width<=480px) {
 
     #social{
         display: none;
