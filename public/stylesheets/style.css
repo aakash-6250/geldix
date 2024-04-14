@@ -56,13 +56,13 @@ main {
 
 header {
     width: 100%;
-    height: 13vh;
+    height: 11vh;
 }
 
 
 nav {
     width: 100%;
-    height: 13vh;
+    height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -71,8 +71,8 @@ nav {
 }
 
 nav img {
-    width: calc(13vh * 1.78);
-    height: 13vh;
+    width: calc(10vh * 2.40);
+    height: 10vh;
 }
 
 #menu {
