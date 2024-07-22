@@ -3,8 +3,11 @@ var router = express.Router();
 const Product = require('../models/Product')
 const Category = require('../models/Category')
 
+let views = 0;
+
 // home page
 router.get('/', async function (req, res, next) {
+  console.log('views :', views++)
   res.render('index')
 });
 
