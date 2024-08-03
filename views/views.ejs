@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Visitor Map</title>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiDRyyLZ2bttb5y8Fetd9eYAe5IfxYgEw&map_ids=YOUR_MAP_ID&libraries=marker"></script>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
+  <style>
+    #map {
+      height: 600px;
+      width: 100%;
+    }
+
+    .custom-marker {
+      background-color: #2196F3;
+      color: white;
+      padding: 2px;
+      border-radius: 5px;
+      font-size: 14px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <script>
+    function initMap() {
+      const map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 2,
+        center: { lat: 0, lng: 0 },
+        mapId: 'c42d2b6f67ec75fc'
+      });
+
+      fetch('/api/visitors')
+        .then(response => response.json())
+        .then(data => {
+          data.forEach(visitor => {
+            const { lat, lng, city, country } = visitor.location;
+
+            const markerElement = document.createElement('div');
+            markerElement.className = 'custom-marker';
+            markerElement.innerHTML = `<i class="ri-map-pin-user-fill"></i>`;
+
+            new google.maps.marker.AdvancedMarkerElement({
+              map,
+              position: { lat, lng },
+              content: markerElement,
+            });
+          });
+        });
+    }
+
+    window.onload = initMap;
+  </script>
+</body>
+</html>

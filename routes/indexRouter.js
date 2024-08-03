@@ -2,12 +2,13 @@ var express = require('express');
 var router = express.Router();
 const Product = require('../models/Product')
 const Category = require('../models/Category')
+const tracker = require('../middleware/trackVisitor')
 
 let views = 0;
 
 // home page
 router.get('/', async function (req, res, next) {
-  console.log('views :', views++)
+  tracker(req, res, next);
   res.render('index')
 });
 
@@ -57,6 +58,10 @@ router.get('/admin', isLoggedOut, (req, res) => {
 //Admin Dashboard
 router.get('/dashboard', isLoggedIn, async (req, res) => {
   return res.render('dashboard');
+});
+
+router.get('/visitors', isLoggedIn, async (req, res) => {
+  return res.render('views');
 });
 
 

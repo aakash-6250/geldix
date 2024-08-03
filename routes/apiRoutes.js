@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const apicontroller = require('../controllers/apiController');
 const upload = require('../controllers/multer');
+const visitors = require('../controllers/visitorController')
 
 router.post('/login',isLoggedOut, apicontroller.login);
 router.post('/register',isLoggedOut, apicontroller.register);
@@ -14,7 +15,7 @@ router.get('/categories',isLoggedIn,apicontroller.getCategories);
 router.get('/product/:id',isLoggedIn, apicontroller.getProductById);
 router.get('/product/category/:id',isLoggedIn, apicontroller.getProductsByCategory);
 router.get('/category/:id',isLoggedIn, apicontroller.getCategoryById);
-
+router.get('/visitors',isLoggedIn, visitors);
 
 
 function isLoggedIn(req, res, next) {
