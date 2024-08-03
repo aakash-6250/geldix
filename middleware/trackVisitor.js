@@ -3,7 +3,8 @@ const axios = require('axios');
 
 module.exports = async (req, res, next) => {
     try {
-        const ip= req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+        let ip= req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+        ip= ip.split(':').pop();
         console.log(ip);
         const response = await axios(`http://ip-api.com/json/${ip}`);
         console.log(response.data)
