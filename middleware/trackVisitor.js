@@ -7,14 +7,16 @@ module.exports = async (req, res, next) => {
         console.log(ip);
         const response = await axios(`http://ip-api.com/json/${ip}`);
         console.log(response.data)
-        const { lat, lon, country, city } = response.data;
-        const existingVisitor = await Visitor.findOne({ ip });
-        if (!existingVisitor) {
-            const visitor = await new Visitor({ ip, location: { lat, lng: lon, country, city } }).save();
-        } else {
-            existingVisitor.location = { lat, lon, country, city };
-            existingVisitor.visits++;
-            await existingVisitor.save();
+        if (response.data.status === 'success') {
+            const { lat, lon, country, city } = response.data;
+            const existingVisitor = await Visitor.findOne({ ip });
+            if (!existingVisitor) {
+                const visitor = await new Visitor({ ip, location: { lat, lng: lon, country, city } }).save();
+            } else {
+                existingVisitor.location = { lat, lon, country, city };
+                existingVisitor.visits++;
+                await existingVisitor.save();
+            }
         }
     } catch (error) {
         console.log(error);
