@@ -2,7 +2,7 @@ const Visitor = require('../models/visitors');
 const axios = require('axios');
 
 module.exports = async (req, res, next) => {
-    const ip = 'geldix.in';
+    const ip = req.ip;
     const response = await axios(`http://ip-api.com/json/${ip}`);
     const { lat, lon, country, city } = response.data;
     const existingVisitor = await Visitor.findOne({ ip });
