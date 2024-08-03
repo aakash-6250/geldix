@@ -1,25 +1,40 @@
+const { default: fetch } = import('node-fetch');
 const Visitor = require('../models/visitors');
-const axios = require('axios');
 
 module.exports = async (req, res, next) => {
     try {
-        let ip= req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-        ip= ip.split(':').pop();
-        console.log(ip);
-        const response = await axios(`http://ip-api.com/json/${ip}`);
-        console.log(response.data)
-        if (response.data.status === 'success') {
-            const { lat, lon, country, city } = response.data;
-            const existingVisitor = await Visitor.findOne({ ip });
-            if (!existingVisitor) {
-                const visitor = await new Visitor({ ip, location: { lat, lng: lon, country, city } }).save();
-            } else {
-                existingVisitor.location = { lat, lon, country, city };
-                existingVisitor.visits++;
-                await existingVisitor.save();
-            }
+      const { default: fetch } = await import('node-fetch');
+  
+      let ip = req.ip;
+      ip = ip.split(':').pop();
+      console.log(ip);
+      
+      const response = await fetch(`http://ip-api.com/json/${ip}`);
+      
+      const data = await response.json();
+      console.log(data);
+      
+      if (data.status === 'success') {
+        const { lat, lon, country, city } = data;
+        
+        // Check if visitor already exists
+        const existingVisitor = await Visitor.findOne({ ip });
+        
+        if (!existingVisitor) {
+          // Save new visitor
+          const visitor = new Visitor({ ip, location: { lat, lng: lon, country, city } });
+          await visitor.save();
+        } else {
+          // Update existing visitor
+          existingVisitor.location = { lat, lng: lon, country, city };
+          existingVisitor.visits++;
+          await existingVisitor.save();
         }
+      } else {
+        console.log(`IP-API response error: ${data.message}`);
+      }
+      
     } catch (error) {
-        console.log(error);
+      console.error('Error processing visitor data:', error);
     }
-}
+  };
