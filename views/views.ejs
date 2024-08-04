@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Visitor Map</title>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiDRyyLZ2bttb5y8Fetd9eYAe5IfxYgEw&map_ids=YOUR_MAP_ID&libraries=marker"></script>
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiDRyyLZ2bttb5y8Fetd9eYAe5IfxYgEw&map_ids=YOUR_MAP_ID&libraries=marker"></script>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
   <style>
+    main {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
     #map {
       height: 600px;
       width: 100%;
@@ -18,10 +28,31 @@
       font-size: 16px;
       text-align: center;
     }
+
+    .visitors {
+      background-color: #2196F3;
+      display: flex;
+      flex-direction: column;
+      width: max-content;
+    }
+
+    .visitor {
+      display: flex;
+      color: white;
+    }
+
+    .visitor p {
+      text-align: center;
+      width: 300px;
+    }
   </style>
 </head>
+
 <body>
-  <div id="map"></div>
+  <main>
+    <div id="map"></div>
+    <div class="visitors"></div>
+  </main>
   <script>
     function initMap() {
       const map = new google.maps.Map(document.getElementById('map'), {
@@ -34,12 +65,25 @@
         .then(response => response.json())
         .then(data => {
           data.forEach(visitor => {
-            console.log(visitor.location)
             const { lat, lng, city, country } = visitor.location;
+            const updatedAt = new Date(visitor.updatedAt);
+            const formattedDate = updatedAt.toLocaleString("en-IN");
 
             const markerElement = document.createElement('div');
             markerElement.className = 'custom-marker';
             markerElement.innerHTML = `<i class="ri-map-pin-user-fill"></i>`;
+
+            const visitorsContainer = document.querySelector('.visitors');
+            const visitorsElement = document.createElement('div');
+            visitorsElement.className = 'visitor';
+            visitorsElement.innerHTML = `
+            <p class="ip">IP: ${visitor.ip}</p>
+            <p class="city">${visitor.location.city}, ${visitor.location.country}</p>
+            <p class="date">Last Updated: ${formattedDate}</p>
+            <p class="time">Visit Time: ${updatedAt.toLocaleTimeString()}</p>
+            <p class="visits">${visitor.visits} visits</p>
+          `;
+            visitorsContainer.appendChild(visitorsElement);
 
             new google.maps.marker.AdvancedMarkerElement({
               map,
@@ -53,4 +97,5 @@
     window.onload = initMap;
   </script>
 </body>
+
 </html>
