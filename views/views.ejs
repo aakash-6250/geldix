@@ -2,7 +2,9 @@
 <html>
 
 <head>
-  <title>Visitor Map</title>
+  <title>Geldix Visitors</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiDRyyLZ2bttb5y8Fetd9eYAe5IfxYgEw&map_ids=YOUR_MAP_ID&libraries=marker"></script>
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
@@ -31,19 +33,21 @@
 
     .visitors {
       background-color: #2196F3;
+      padding: 20px;
       display: flex;
       flex-direction: column;
-      width: max-content;
     }
 
     .visitor {
+      border-bottom: 2px solid white;
+      width: 100%;
       display: flex;
       color: white;
     }
 
-    .visitor p {
+    .visitor p{
+      width: 20%;
       text-align: center;
-      width: 300px;
     }
   </style>
 </head>
@@ -64,30 +68,40 @@
       fetch('/api/visitors')
         .then(response => response.json())
         .then(data => {
+          const cityCounts = {};
+
           data.forEach(visitor => {
             const { lat, lng, city, country } = visitor.location;
             const updatedAt = new Date(visitor.updatedAt);
             const formattedDate = updatedAt.toLocaleString("en-IN");
 
-            const markerElement = document.createElement('div');
-            markerElement.className = 'custom-marker';
-            markerElement.innerHTML = `<i class="ri-map-pin-user-fill"></i>`;
+            if (!cityCounts[city]) {
+              cityCounts[city] = { lat, lng, country, count: 0 };
+            }
+            cityCounts[city].count++;
 
             const visitorsContainer = document.querySelector('.visitors');
             const visitorsElement = document.createElement('div');
             visitorsElement.className = 'visitor';
             visitorsElement.innerHTML = `
-            <p class="ip">IP: ${visitor.ip}</p>
-            <p class="city">${visitor.location.city}, ${visitor.location.country}</p>
-            <p class="date">Last Updated: ${formattedDate}</p>
-            <p class="time">Visit Time: ${updatedAt.toLocaleTimeString()}</p>
-            <p class="visits">${visitor.visits} visits</p>
-          `;
+                            <p class="ip">IP: ${visitor.ip}</p>
+                            <p class="city">${city}, ${country}</p>
+                            <p class="date">Last Updated: ${formattedDate}</p>
+                            <p class="time">Visit Time: ${updatedAt.toLocaleTimeString()}</p>
+                            <p class="visits">${visitor.visits} visits</p>
+                        `;
             visitorsContainer.appendChild(visitorsElement);
+          });
+
+          Object.keys(cityCounts).forEach(city => {
+            const cityData = cityCounts[city];
+            const markerElement = document.createElement('div');
+            markerElement.className = 'custom-marker';
+            markerElement.innerHTML = `<i class="ri-map-pin-user-fill"></i> ${city} (${cityData.count})`;
 
             new google.maps.marker.AdvancedMarkerElement({
               map,
-              position: { lat, lng },
+              position: { lat: cityData.lat, lng: cityData.lng },
               content: markerElement,
             });
           });
