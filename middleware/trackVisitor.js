@@ -7,12 +7,10 @@ module.exports = async (req, res, next) => {
   
       let ip = req.ip;
       ip = ip.split(':').pop();
-      console.log(ip);
       
       const response = await fetch(`http://ip-api.com/json/${ip}`);
       
       const data = await response.json();
-      console.log(data);
       
       if (data.status === 'success') {
         const { lat, lon, country, city } = data;

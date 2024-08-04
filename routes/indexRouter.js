@@ -4,11 +4,12 @@ const Product = require('../models/Product')
 const Category = require('../models/Category')
 const tracker = require('../middleware/trackVisitor')
 
-let views = 0;
+let views = 1;
 
 // home page
 router.get('/', async function (req, res, next) {
   tracker(req, res, next);
+  console.log('views:', views++)
   res.render('index')
 });
 
