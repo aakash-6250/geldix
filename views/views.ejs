@@ -43,18 +43,34 @@
       width: 100%;
       display: flex;
       color: white;
+      display: flex;
+      justify-content: space-around;
     }
 
-    .visitor p{
-      width: 20%;
+    .visitor p {
       text-align: center;
+      min-width: 20%;
+    }
+
+    .total-visitor{
+      color: white;
+      text-align: center;
+      border-bottom: 2px solid white;
+    }
+
+    @media screen and (max-width: 768px) {
+      .visitor {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
 
 <body>
   <main>
-    <div id="map"></div>
+    <div class="container">
+      <div id="map"></div>
+    </div>
     <div class="visitors"></div>
   </main>
   <script>
@@ -69,6 +85,13 @@
         .then(response => response.json())
         .then(data => {
           const cityCounts = {};
+          let visitorListSize = 0;
+
+          const visitorsContainer = document.querySelector('.visitors');
+          const totalVisitor = document.createElement('div');
+          totalVisitor.className = 'total-visitor';
+          totalVisitor.innerHTML = `<h2>Total Visitors: ${data.length}</h2>`;
+          visitorsContainer.appendChild(totalVisitor);
 
           data.forEach(visitor => {
             const { lat, lng, city, country } = visitor.location;
@@ -80,17 +103,21 @@
             }
             cityCounts[city].count++;
 
-            const visitorsContainer = document.querySelector('.visitors');
-            const visitorsElement = document.createElement('div');
-            visitorsElement.className = 'visitor';
-            visitorsElement.innerHTML = `
+            if (visitorListSize <= 10) {
+              const visitorsContainer = document.querySelector('.visitors');
+              const visitorsElement = document.createElement('div');
+              visitorsElement.className = 'visitor';
+              visitorsElement.innerHTML = `
                             <p class="ip">IP: ${visitor.ip}</p>
                             <p class="city">${city}, ${country}</p>
                             <p class="date">Last Updated: ${formattedDate}</p>
                             <p class="time">Visit Time: ${updatedAt.toLocaleTimeString()}</p>
                             <p class="visits">${visitor.visits} visits</p>
                         `;
-            visitorsContainer.appendChild(visitorsElement);
+              visitorsContainer.appendChild(visitorsElement);
+              visitorListSize++;
+            }
+
           });
 
           Object.keys(cityCounts).forEach(city => {
